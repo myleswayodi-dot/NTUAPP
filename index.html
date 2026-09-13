@@ -17,6 +17,7 @@
 html,body{margin:0;background:#111;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
 body{font-size:15px}
 button{font:inherit;cursor:pointer}
+input{font:inherit}
 .app{width:100%;max-width:520px;min-height:100vh;margin:auto;background:#111;padding-bottom:68px}
 
 .top{
@@ -143,6 +144,48 @@ gap:12px;padding:18px 15px;border-bottom:1px solid #ddd;
 line-height:1.35
 }
 .profile-row:last-child{border-bottom:0}
+
+.profile-edit{
+padding:15px;
+border-top:1px solid #ddd;
+background:#fafafa
+}
+.profile-edit h3{
+margin:0 0 14px;
+font-size:17px
+}
+.edit-field{
+margin-bottom:12px
+}
+.edit-field label{
+display:block;
+font-size:13px;
+font-weight:700;
+margin-bottom:5px;
+color:#444
+}
+.edit-field input{
+width:100%;
+padding:11px 12px;
+border:1px solid #bbb;
+border-radius:7px;
+background:#fff;
+color:#222;
+outline:none
+}
+.edit-field input:focus{
+border-color:#bd004d
+}
+.save-profile{
+width:100%;
+padding:12px;
+border:0;
+border-radius:7px;
+background:#bd004d;
+color:#fff;
+font-weight:700
+}
+
 .roles-head,.language-head{
 padding:16px;border-bottom:1px solid #ddd;font-size:17px
 }
@@ -214,8 +257,11 @@ display:none;z-index:80;font-weight:700
 
 <header class="top">
 <button class="menu" id="menu" aria-label="Open menu">☰</button>
+
 <img class="logo" src="myntu-logo.png" alt="MyNTU">
+
 <div class="title" id="pageTitle">Student</div>
+
 <button class="more" onclick="toast('More')">⋮</button>
 <button class="bell" onclick="toast('Notifications')">♧</button>
 </header>
@@ -457,10 +503,45 @@ display:none;z-index:80;font-weight:700
 <div class="profile-page">
 
 <div class="profile-card">
-<div class="profile-row"><b>Given name</b><span>Emmanuel</span></div>
-<div class="profile-row"><b>Family name</b><span>Morton</span></div>
-<div class="profile-row"><b>User ID</b><span>819ec282-cc68-443a-9a95-8793adadfed9</span></div>
-<div class="profile-row"><b>Tenant ID</b><span>8acbc2c5-c8ed-42c7-8169-ba438a0dbe2f</span></div>
+
+<div class="profile-row">
+<b>Given name</b>
+<span id="givenNameDisplay">Emmanuel</span>
+</div>
+
+<div class="profile-row">
+<b>Family name</b>
+<span id="familyNameDisplay">Morton</span>
+</div>
+
+<div class="profile-row">
+<b>Student ID</b>
+<span id="studentIdDisplay">819ec282</span>
+</div>
+
+<div class="profile-edit">
+<h3>Edit student details</h3>
+
+<div class="edit-field">
+<label for="givenNameInput">Given name</label>
+<input id="givenNameInput" type="text" value="Emmanuel">
+</div>
+
+<div class="edit-field">
+<label for="familyNameInput">Family name</label>
+<input id="familyNameInput" type="text" value="Morton">
+</div>
+
+<div class="edit-field">
+<label for="studentIdInput">Student ID</label>
+<input id="studentIdInput" type="text" value="819ec282">
+</div>
+
+<button class="save-profile" onclick="saveProfile()">
+Save student details
+</button>
+</div>
+
 </div>
 
 <div class="roles-card">
@@ -508,7 +589,8 @@ display:none;z-index:80;font-weight:700
 
 <div class="user" id="user">
 <button onclick="document.getElementById('user').classList.toggle('open')">
-◉ &nbsp; Emmanuel Morton <span style="float:right">⌄</span>
+◉ &nbsp; <span id="menuUserName">Emmanuel Morton</span>
+<span style="float:right">⌄</span>
 </button>
 
 <div class="userlinks">
@@ -590,6 +672,50 @@ window.toastTimer=setTimeout(()=>{
 t.style.display='none';
 },1600);
 }
+
+/* -------------------------------
+   STUDENT PROFILE
+-------------------------------- */
+
+function loadProfile(){
+
+const givenName=localStorage.getItem('myntuGivenName') || 'Emmanuel';
+const familyName=localStorage.getItem('myntuFamilyName') || 'Morton';
+const studentId=localStorage.getItem('myntuStudentId') || '819ec282';
+
+document.getElementById('givenNameDisplay').textContent=givenName;
+document.getElementById('familyNameDisplay').textContent=familyName;
+document.getElementById('studentIdDisplay').textContent=studentId;
+
+document.getElementById('givenNameInput').value=givenName;
+document.getElementById('familyNameInput').value=familyName;
+document.getElementById('studentIdInput').value=studentId;
+
+document.getElementById('menuUserName').textContent=
+givenName + ' ' + familyName;
+}
+
+function saveProfile(){
+
+const givenName=document.getElementById('givenNameInput').value.trim();
+const familyName=document.getElementById('familyNameInput').value.trim();
+const studentId=document.getElementById('studentIdInput').value.trim();
+
+if(!givenName || !familyName || !studentId){
+toast('Please complete all fields');
+return;
+}
+
+localStorage.setItem('myntuGivenName',givenName);
+localStorage.setItem('myntuFamilyName',familyName);
+localStorage.setItem('myntuStudentId',studentId);
+
+loadProfile();
+
+toast('Student details saved');
+}
+
+loadProfile();
 </script>
 
 </body>
