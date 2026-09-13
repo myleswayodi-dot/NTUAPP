@@ -25,19 +25,21 @@ html,body{
   padding:0;
   background:#111;
   color:#fff;
-  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;
 }
 
 body{
   font-size:15px;
 }
 
-button,input{
+button,
+input{
   font:inherit;
 }
 
 button{
   cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
 }
 
 .app{
@@ -49,7 +51,10 @@ button{
   padding-bottom:68px;
 }
 
-/* TOP HEADER */
+
+/* =========================================================
+   TOP HEADER
+========================================================= */
 
 .top{
   height:82px;
@@ -72,6 +77,9 @@ button{
   border:0;
   background:transparent;
   color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .menu{
@@ -96,9 +104,13 @@ button{
   font-size:27px;
   font-weight:700;
   flex:1;
+  color:#000;
 }
 
-/* SUB NAVIGATION */
+
+/* =========================================================
+   SUB NAVIGATION
+========================================================= */
 
 .subbar{
   height:48px;
@@ -125,7 +137,10 @@ button{
   background:#ed0059;
 }
 
-/* SCREENS */
+
+/* =========================================================
+   SCREENS
+========================================================= */
 
 .screen{
   display:none;
@@ -139,7 +154,10 @@ button{
   padding:5px;
 }
 
-/* NEWS */
+
+/* =========================================================
+   NEWS
+========================================================= */
 
 .news{
   background:#fff;
@@ -166,7 +184,10 @@ button{
   font-size:20px;
 }
 
-/* TILES */
+
+/* =========================================================
+   TILES
+========================================================= */
 
 .grid{
   display:grid;
@@ -218,7 +239,10 @@ button{
   color:#fff;
 }
 
-/* TIMETABLE */
+
+/* =========================================================
+   TIMETABLE
+========================================================= */
 
 .timetable{
   background:#bd004d;
@@ -246,7 +270,10 @@ button{
   margin-top:5px;
 }
 
-/* SECTIONS */
+
+/* =========================================================
+   SECTIONS
+========================================================= */
 
 .section{
   padding:6px 5px;
@@ -288,7 +315,10 @@ button{
   font-size:12px;
 }
 
-/* CALENDAR */
+
+/* =========================================================
+   CALENDAR
+========================================================= */
 
 .calendar{
   background:#fff;
@@ -401,7 +431,10 @@ button{
   background:#1976d2;
 }
 
-/* PROFILE */
+
+/* =========================================================
+   PROFILE
+========================================================= */
 
 .profile-page{
   background:#f5f5f5;
@@ -422,8 +455,6 @@ button{
 .profile-card{
   overflow:hidden;
 }
-
-/* NAME + ID AT TOP */
 
 .profile-user{
   display:flex;
@@ -457,8 +488,6 @@ button{
   color:#ccc;
 }
 
-/* EDITABLE PROFILE FIELDS */
-
 .profile-row{
   display:block;
   padding:15px;
@@ -485,8 +514,6 @@ button{
   border-bottom:0;
 }
 
-/* SAVE BUTTON */
-
 .save-profile{
   width:calc(100% - 30px);
   margin:15px;
@@ -498,8 +525,6 @@ button{
   font-size:16px;
   font-weight:700;
 }
-
-/* ROLES */
 
 .roles-head,
 .language-head{
@@ -520,7 +545,10 @@ button{
   padding:18px;
 }
 
-/* BOTTOM NAVIGATION */
+
+/* =========================================================
+   BOTTOM NAVIGATION
+========================================================= */
 
 .bottom{
   position:fixed;
@@ -553,12 +581,16 @@ button{
   font-weight:700;
 }
 
-/* SIDE MENU */
+
+/* =========================================================
+   SIDE MENU / DRAWER
+   MATCHES THE PROVIDED MYNTU SCREENSHOT
+========================================================= */
 
 .drawer{
   position:fixed;
   inset:0;
-  background:#0008;
+  background:rgba(0,0,0,.55);
   z-index:50;
   display:none;
 }
@@ -568,31 +600,45 @@ button{
 }
 
 .side{
-  width:min(390px,83vw);
+  width:min(690px,calc(100vw - 18px));
   height:100%;
-  background:#333;
-  box-shadow:6px 0 20px #0008;
+  background:#313131;
+  box-shadow:6px 0 20px rgba(0,0,0,.65);
   overflow:auto;
 }
 
+
+/* ---------------------------------------------------------
+   LIGHT GREY MYNTU HEADER
+--------------------------------------------------------- */
+
 .sidehead{
-  height:82px;
-  background:#303030;
+  height:114px;
+  background:#c6c6c6;
   display:flex;
   align-items:center;
-  padding:10px 14px;
-  gap:12px;
+  padding:0 26px;
+  gap:20px;
 }
 
 .sidehead img{
-  width:42px;
-  height:42px;
+  width:52px;
+  height:52px;
   object-fit:contain;
 }
 
 .sidehead strong{
-  font-size:27px;
+  font-size:48px;
+  line-height:1;
+  font-weight:700;
+  color:#000;
+  letter-spacing:-1.5px;
 }
+
+
+/* ---------------------------------------------------------
+   USER PROFILE BAR
+--------------------------------------------------------- */
 
 .user{
   background:#242424;
@@ -601,53 +647,155 @@ button{
 
 .user>button{
   width:100%;
+  min-height:66px;
   border:0;
-  background:none;
-  color:#fff;
+  background:#3b3b3b;
+  color:#f4f4f4;
   text-align:left;
-  font-size:16px;
-  padding:15px 14px;
+  font-size:20px;
+  font-weight:500;
+  padding:0 28px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.user>button .user-person-icon{
+  width:28px;
+  height:28px;
+  border:2px solid #eee;
+  border-radius:50%;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+
+.user>button .user-chevron{
+  margin-left:auto;
+  font-size:23px;
+  line-height:1;
 }
 
 .userlinks{
   display:none;
-  padding:5px 10px 10px 28px;
+  padding:4px 0 8px;
+  background:#242424;
 }
 
 .userlinks button{
   display:block;
-  padding:13px 0;
+  width:100%;
+  padding:18px 55px;
   border:0;
   background:none;
-  color:#ddd;
-  font-size:15px;
+  color:#eee;
+  font-size:20px;
+  line-height:1.15;
+  text-align:left;
+  font-weight:400;
+}
+
+.userlinks button:active{
+  background:#333;
 }
 
 .user.open .userlinks{
   display:block;
 }
 
+
+/* ---------------------------------------------------------
+   DRAWER SECTION HEADINGS
+--------------------------------------------------------- */
+
 .group{
-  padding:12px 14px 4px;
+  padding:22px 28px 12px;
+  background:#303030;
   color:#aaa;
-  font-size:13px;
+  font-size:19px;
+  line-height:1;
+  font-weight:400;
+  letter-spacing:.3px;
 }
+
+
+/* ---------------------------------------------------------
+   DRAWER ITEMS
+--------------------------------------------------------- */
 
 .sideitem{
   width:100%;
+  min-height:64px;
   border:0;
-  background:transparent;
+  background:#444;
   color:#fff;
   text-align:left;
-  padding:12px 16px;
-  font-size:15px;
+  padding:0 28px;
+  font-size:20px;
+  font-weight:500;
+  display:flex;
+  align-items:center;
+  gap:17px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.sideitem + .sideitem{
+  border-top:1px solid rgba(255,255,255,.04);
 }
 
 .sideitem.active{
-  background:#4a4a4a;
+  background:#505050;
 }
 
-/* TOAST */
+
+/* ICONS */
+
+.drawer-icon{
+  width:28px;
+  min-width:28px;
+  height:28px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color:#f4f4f4;
+  font-size:25px;
+  font-weight:400;
+}
+
+.home-icon{
+  font-size:27px;
+}
+
+.news-icon-drawer{
+  font-size:26px;
+}
+
+.clover-icon{
+  font-size:26px;
+}
+
+.email-badge{
+  margin-left:auto;
+  min-width:34px;
+  height:34px;
+  padding:0 8px;
+  border-radius:50%;
+  background:#27b9df;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  font-weight:600;
+}
+
+
+/* ---------------------------------------------------------
+   TOAST
+--------------------------------------------------------- */
 
 #toast{
   position:fixed;
@@ -663,7 +811,47 @@ button{
   font-weight:700;
 }
 
-/* SMALL SCREENS */
+
+/* =========================================================
+   SMALL SCREENS
+========================================================= */
+
+@media(max-width:520px){
+
+  .side{
+    width:calc(100vw - 18px);
+  }
+
+  .sidehead{
+    height:114px;
+    padding:0 26px;
+  }
+
+  .sidehead strong{
+    font-size:42px;
+  }
+
+  .user>button{
+    font-size:18px;
+    padding-left:25px;
+    padding-right:25px;
+  }
+
+  .userlinks button{
+    font-size:18px;
+    padding-left:55px;
+  }
+
+  .group{
+    font-size:18px;
+    padding-left:27px;
+  }
+
+  .sideitem{
+    font-size:18px;
+    padding-left:27px;
+  }
+}
 
 @media(max-width:370px){
 
@@ -680,15 +868,23 @@ button{
   .title{
     font-size:24px;
   }
+
+  .sidehead strong{
+    font-size:35px;
+  }
 }
 </style>
 </head>
+
 
 <body>
 
 <div class="app">
 
-<!-- HEADER -->
+
+<!-- ======================================================
+     HEADER
+====================================================== -->
 
 <header class="top">
 
@@ -730,7 +926,9 @@ Student
 </header>
 
 
-<!-- TOP APP NAVIGATION -->
+<!-- ======================================================
+     TOP APP NAVIGATION
+====================================================== -->
 
 <nav class="subbar">
 
@@ -767,7 +965,10 @@ Extra-curricular
 
 <main>
 
-<!-- STUDENT HOME -->
+
+<!-- ======================================================
+     STUDENT HOME
+====================================================== -->
 
 <section
   id="student"
@@ -934,7 +1135,9 @@ Tickets &amp; events
 </section>
 
 
-<!-- MY COURSE -->
+<!-- ======================================================
+     MY COURSE
+====================================================== -->
 
 <section
   id="course"
@@ -967,7 +1170,9 @@ Course information
 </section>
 
 
-<!-- STUDENT SUPPORT -->
+<!-- ======================================================
+     STUDENT SUPPORT
+====================================================== -->
 
 <section
   id="support"
@@ -982,98 +1187,62 @@ Student Support - light
 
 <div class="cards">
 
-<button
-  class="ex"
-  onclick="toast('Employability')"
->
+<button class="ex" onclick="toast('Employability')">
 <span class="ico">〽</span>
 <small>Employability</small>
 </button>
 
-<button
-  class="ex"
-  onclick="toast('Money')"
->
+<button class="ex" onclick="toast('Money')">
 <span class="ico">▱</span>
 <small>Money</small>
 </button>
 
-<button
-  class="ex"
-  onclick="toast('Student card top up')"
->
+<button class="ex" onclick="toast('Student card top up')">
 <span class="ico">▤</span>
 <small>Student card top up</small>
 </button>
 
-<button
-  class="ex"
-  onclick="toast('Wellbeing toolkit')"
->
+<button class="ex" onclick="toast('Wellbeing toolkit')">
 <span class="ico">♡</span>
 <small>Wellbeing toolkit</small>
 </button>
 
-<button
-  class="ex"
-  onclick="toast('Get wellbeing help')"
->
+<button class="ex" onclick="toast('Get wellbeing help')">
 <span class="ico">♡</span>
 <small>Get wellbeing help</small>
 </button>
 
-<button
-  class="ex"
-  onclick="toast('Disability inclusion')"
->
+<button class="ex" onclick="toast('Disability inclusion')">
 <span class="ico">✣</span>
 <small>Disability inclusion</small>
 </button>
 
-<button
-  class="ex"
-  onclick="toast('Exam support')"
->
+<button class="ex" onclick="toast('Exam support')">
 <span class="ico">☷</span>
 <small>Exam support</small>
 </button>
 
-<button
-  class="ex"
-  onclick="toast('StudentHub')"
->
+<button class="ex" onclick="toast('StudentHub')">
 <span class="ico">▱</span>
 <small>StudentHub</small>
 </button>
 
-<button
-  class="ex"
-  onclick="toast('MyStudentRecord')"
->
+<button class="ex" onclick="toast('MyStudentRecord')">
 <span class="ico">▧</span>
 <small>MyStudentRecord</small>
 </button>
 
-<button
-  class="ex"
-  onclick="toast('Report + Support')"
->
+<button class="ex" onclick="toast('Report + Support')">
 <span class="ico">◁</span>
 <small>Report + Support</small>
 </button>
 
-<button
-  class="ex"
-  onclick="toast('Safety on campus')"
->
+<button class="ex" onclick="toast('Safety on campus')">
 <span class="ico">♢</span>
 <small>Safety on campus</small>
 </button>
 
-<button
-  class="ex"
-  onclick="toast('Visa / Immigration')"
->
+<button class="ex" onclick="toast('Visa / Immigration')">
 <span class="ico">▤</span>
 <small>Visa / Immigration</small>
 </button>
@@ -1085,7 +1254,9 @@ Student Support - light
 </section>
 
 
-<!-- EXTRA CURRICULAR -->
+<!-- ======================================================
+     EXTRA CURRICULAR
+====================================================== -->
 
 <section
   id="extra"
@@ -1177,7 +1348,9 @@ Extracurricular - light
 </section>
 
 
-<!-- CALENDAR -->
+<!-- ======================================================
+     CALENDAR
+====================================================== -->
 
 <section
   id="calendar"
@@ -1287,7 +1460,9 @@ Today&nbsp; ›
 </section>
 
 
-<!-- PROFILE -->
+<!-- ======================================================
+     PROFILE
+====================================================== -->
 
 <section
   id="profile"
@@ -1299,7 +1474,6 @@ Today&nbsp; ›
 
 <div class="profile-card">
 
-<!-- PROFILE HEADER -->
 
 <div class="profile-user">
 
@@ -1327,8 +1501,6 @@ Emmanuel Morton
 
 </div>
 
-
-<!-- EDIT NAME -->
 
 <div class="profile-row">
 
@@ -1362,8 +1534,6 @@ Family name
 </div>
 
 
-<!-- EDIT STUDENT ID -->
-
 <div class="profile-row">
 
 <b>
@@ -1379,8 +1549,6 @@ Student ID
 
 </div>
 
-
-<!-- EDIT YEAR -->
 
 <div class="profile-row">
 
@@ -1409,8 +1577,6 @@ Save profile
 </div>
 
 
-<!-- ROLES -->
-
 <div class="roles-card">
 
 <div class="roles-head">
@@ -1438,8 +1604,6 @@ UserRead
 </div>
 
 
-<!-- LANGUAGE -->
-
 <div class="language-card">
 ◉ &nbsp; Language
 </div>
@@ -1452,7 +1616,9 @@ UserRead
 </main>
 
 
-<!-- BOTTOM NAV -->
+<!-- ======================================================
+     BOTTOM NAVIGATION
+====================================================== -->
 
 <nav class="bottom">
 
@@ -1516,7 +1682,9 @@ StudentHub
 </div>
 
 
-<!-- SIDE DRAWER -->
+<!-- ======================================================
+     SIDE DRAWER
+====================================================== -->
 
 <div
   class="drawer"
@@ -1526,7 +1694,7 @@ StudentHub
 <aside class="side">
 
 
-<!-- SIDE HEADER -->
+<!-- MYNTU HEADER -->
 
 <div class="sidehead">
 
@@ -1542,7 +1710,7 @@ MyNTU
 </div>
 
 
-<!-- USER -->
+<!-- USER PROFILE -->
 
 <div
   class="user"
@@ -1550,17 +1718,18 @@ MyNTU
 >
 
 <button
-  onclick="document.getElementById('user').classList.toggle('open')"
+  onclick="toggleUser()"
 >
 
-<span>◉</span>
-&nbsp;
+<span class="user-person-icon">
+●
+</span>
 
 <span id="menuStudentName">
 Emmanuel Morton 2025 (N1388236)
 </span>
 
-<span style="float:right">
+<span class="user-chevron">
 ⌄
 </span>
 
@@ -1569,35 +1738,51 @@ Emmanuel Morton 2025 (N1388236)
 
 <div class="userlinks">
 
-<button data-screen="profile">
+<button
+  data-screen="profile"
+>
 Profile
 </button>
 
-<button onclick="toast('Preferences')">
+<button
+  onclick="toast('Preferences')"
+>
 Preferences
 </button>
 
-<button onclick="toast('Reload app')">
+<button
+  onclick="toast('Reload app')"
+>
 Reload app
 </button>
 
-<button onclick="toast('Services')">
+<button
+  onclick="toast('Services')"
+>
 Services
 </button>
 
-<button onclick="toast('Active sessions')">
+<button
+  onclick="toast('Active sessions')"
+>
 Active sessions
 </button>
 
-<button onclick="toast('Privacy policy')">
+<button
+  onclick="toast('Privacy policy')"
+>
 Privacy policy
 </button>
 
-<button onclick="toast('About')">
+<button
+  onclick="toast('About')"
+>
 About
 </button>
 
-<button onclick="toast('Signed out')">
+<button
+  onclick="toast('Signed out')"
+>
 Sign out
 </button>
 
@@ -1612,11 +1797,20 @@ Sign out
 DASHBOARDS
 </div>
 
+
 <button
   class="sideitem active"
   data-screen="student"
 >
-⌂ &nbsp; Student
+
+<span class="drawer-icon home-icon">
+⌂
+</span>
+
+<span>
+Student
+</span>
+
 </button>
 
 
@@ -1626,39 +1820,58 @@ DASHBOARDS
 APPS
 </div>
 
+
 <button
   class="sideitem"
   data-screen="student"
 >
-▣ &nbsp; Latest news
+
+<span class="drawer-icon news-icon-drawer">
+▣
+</span>
+
+<span>
+Latest news
+</span>
+
 </button>
 
+
 <button
   class="sideitem"
   data-screen="student"
 >
-♧ &nbsp; StudentLight-AppTileAssessmentResults
+
+<span class="drawer-icon clover-icon">
+♧
+</span>
+
+<span>
+StudentLight-AppTileAssessmentResults
+</span>
+
 </button>
 
+
 <button
   class="sideitem"
   data-screen="student"
 >
 
-♧ &nbsp; StudentLight-AppTileEmail
+<span class="drawer-icon clover-icon">
+♧
+</span>
 
-<span
-  style="
-    float:right;
-    background:#27b9df;
-    border-radius:12px;
-    padding:2px 7px
-  "
->
+<span>
+StudentLight-AppTileEmail
+</span>
+
+<span class="email-badge">
 5
 </span>
 
 </button>
+
 
 </aside>
 
@@ -1672,15 +1885,15 @@ APPS
 
 <script>
 
-/* ------------------------------
+/* =========================================================
    PAGE NAVIGATION
------------------------------- */
+========================================================= */
 
-const pages=document.querySelectorAll('.screen');
-const controls=document.querySelectorAll('[data-screen]');
-const drawer=document.getElementById('drawer');
+const pages = document.querySelectorAll('.screen');
+const controls = document.querySelectorAll('[data-screen]');
+const drawer = document.getElementById('drawer');
 
-const titles={
+const titles = {
   student:'Student',
   course:'My Course',
   support:'Student support - light',
@@ -1690,42 +1903,42 @@ const titles={
 };
 
 
-/* ------------------------------
+/* =========================================================
    PROFILE STORAGE
------------------------------- */
+========================================================= */
 
 function loadProfile(){
 
-  const savedGiven=
+  const savedGiven =
     localStorage.getItem('myntu_given_name');
 
-  const savedFamily=
+  const savedFamily =
     localStorage.getItem('myntu_family_name');
 
-  const savedId=
+  const savedId =
     localStorage.getItem('myntu_student_id');
 
-  const savedYear=
+  const savedYear =
     localStorage.getItem('myntu_academic_year');
 
 
   if(savedGiven){
-    document.getElementById('givenName').value=
+    document.getElementById('givenName').value =
       savedGiven;
   }
 
   if(savedFamily){
-    document.getElementById('familyName').value=
+    document.getElementById('familyName').value =
       savedFamily;
   }
 
   if(savedId){
-    document.getElementById('studentId').value=
+    document.getElementById('studentId').value =
       savedId;
   }
 
   if(savedYear){
-    document.getElementById('academicYear').value=
+    document.getElementById('academicYear').value =
       savedYear;
   }
 
@@ -1735,80 +1948,80 @@ function loadProfile(){
 }
 
 
-/* ------------------------------
+/* =========================================================
    UPDATE NAME + ID EVERYWHERE
------------------------------- */
+========================================================= */
 
 function updateStudentDetails(){
 
-  const given=
+  const given =
     document.getElementById('givenName')?.value ||
     'Emmanuel';
 
-  const family=
+  const family =
     document.getElementById('familyName')?.value ||
     'Morton';
 
-  const id=
+  const id =
     document.getElementById('studentId')?.value ||
     'N1388236';
 
-  const year=
+  const year =
     document.getElementById('academicYear')?.value ||
     '2025';
 
 
-  const fullName=
-    (given+' '+family).trim();
+  const fullName =
+    (given + ' ' + family).trim();
 
 
-  const profileName=
+  const profileName =
     document.getElementById('profileDisplayName');
 
-  const profileId=
+  const profileId =
     document.getElementById('profileDisplayId');
 
-  const menuName=
+  const menuName =
     document.getElementById('menuStudentName');
 
 
   if(profileName){
-    profileName.textContent=
+    profileName.textContent =
       fullName;
   }
 
   if(profileId){
-    profileId.textContent=
-      year+' ('+id+')';
+    profileId.textContent =
+      year + ' (' + id + ')';
   }
 
   if(menuName){
-    menuName.textContent=
-      fullName+' '+year+' ('+id+')';
+    menuName.textContent =
+      fullName + ' ' + year + ' (' + id + ')';
   }
 
 }
 
 
-/* ------------------------------
+/* =========================================================
    SAVE PROFILE
------------------------------- */
+========================================================= */
 
 function saveProfile(){
 
-  const given=
+  const given =
     document.getElementById('givenName')
       .value.trim();
 
-  const family=
+  const family =
     document.getElementById('familyName')
       .value.trim();
 
-  const id=
+  const id =
     document.getElementById('studentId')
       .value.trim();
 
-  const year=
+  const year =
     document.getElementById('academicYear')
       .value.trim();
 
@@ -1849,29 +2062,33 @@ function saveProfile(){
 }
 
 
-/* ------------------------------
+/* =========================================================
    SHOW SCREEN
------------------------------- */
+========================================================= */
 
 function show(name){
 
-  pages.forEach(p=>{
+  pages.forEach(p => {
+
     p.classList.toggle(
       'active',
-      p.id===name
+      p.id === name
     );
+
   });
 
 
-  controls.forEach(c=>{
+  controls.forEach(c => {
+
     c.classList.toggle(
       'active',
-      c.dataset.screen===name
+      c.dataset.screen === name
     );
+
   });
 
 
-  document.getElementById('pageTitle').textContent=
+  document.getElementById('pageTitle').textContent =
     titles[name] || 'Student';
 
 
@@ -1884,22 +2101,22 @@ function show(name){
   });
 
 
-  if(name==='profile'){
+  if(name === 'profile'){
     loadProfile();
   }
 
 }
 
 
-/* ------------------------------
+/* =========================================================
    NAV BUTTONS
------------------------------- */
+========================================================= */
 
-controls.forEach(c=>{
+controls.forEach(c => {
 
   c.addEventListener(
     'click',
-    ()=>{
+    () => {
       show(c.dataset.screen);
     }
   );
@@ -1907,24 +2124,37 @@ controls.forEach(c=>{
 });
 
 
-/* ------------------------------
+/* =========================================================
    OPEN SIDE MENU
------------------------------- */
+========================================================= */
 
-document.getElementById('menu').onclick=()=>{
+document.getElementById('menu').onclick = () => {
 
   drawer.classList.add('open');
 
 };
 
 
-/* ------------------------------
+/* =========================================================
+   PROFILE DROPDOWN
+========================================================= */
+
+function toggleUser(){
+
+  document
+    .getElementById('user')
+    .classList.toggle('open');
+
+}
+
+
+/* =========================================================
    CLOSE SIDE MENU
------------------------------- */
+========================================================= */
 
-drawer.onclick=e=>{
+drawer.onclick = e => {
 
-  if(e.target===drawer){
+  if(e.target === drawer){
 
     drawer.classList.remove('open');
 
@@ -1933,19 +2163,19 @@ drawer.onclick=e=>{
 };
 
 
-/* ------------------------------
-   TOAST MESSAGE
------------------------------- */
+/* =========================================================
+   TOAST
+========================================================= */
 
 function toast(message){
 
-  const t=
+  const t =
     document.getElementById('toast');
 
-  t.textContent=
+  t.textContent =
     message;
 
-  t.style.display=
+  t.style.display =
     'block';
 
 
@@ -1954,10 +2184,10 @@ function toast(message){
   );
 
 
-  window.toastTimer=
+  window.toastTimer =
     setTimeout(
-      ()=>{
-        t.style.display='none';
+      () => {
+        t.style.display = 'none';
       },
       1600
     );
@@ -1965,9 +2195,9 @@ function toast(message){
 }
 
 
-/* ------------------------------
-   LOAD SAVED PROFILE
------------------------------- */
+/* =========================================================
+   LOAD PROFILE
+========================================================= */
 
 loadProfile();
 
