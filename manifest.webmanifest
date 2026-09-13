@@ -1,0 +1,9 @@
+{
+  "name":"MyNTU",
+  "short_name":"MyNTU",
+  "start_url":"./index.html",
+  "display":"standalone",
+  "background_color":"#111111",
+  "theme_color":"#303030",
+  "icons":[{"src":"myntu-logo.png","sizes":"192x192","type":"image/png"},{"src":"myntu-logo.png","sizes":"512x512","type":"image/png"}]
+}
