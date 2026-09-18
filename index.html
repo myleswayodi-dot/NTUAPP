@@ -1,12 +1,19 @@
 <!doctype html>
 <html lang="en">
 <head>
+
 <meta charset="utf-8">
 
 <meta name="viewport"
-content="width=device-width,initial-scale=1,viewport-fit=cover">
+      content="width=device-width,
+               initial-scale=1,
+               maximum-scale=1,
+               minimum-scale=1,
+               user-scalable=no,
+               viewport-fit=cover">
 
 <meta name="theme-color" content="#303030">
+
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MyNTU">
@@ -20,7 +27,7 @@ content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>
 
 /* =========================================================
-   BASIC RESET
+   BASIC / IPHONE HOME SCREEN FIX
 ========================================================= */
 
 *{
@@ -31,27 +38,41 @@ content="width=device-width,initial-scale=1,viewport-fit=cover">
 html,
 body{
   width:100%;
+  min-width:100%;
+  max-width:100%;
   min-height:100%;
+
   margin:0;
   padding:0;
-  overflow-x:hidden;
-}
 
-html{
-  background:#111;
-}
-
-body{
   background:#111;
   color:#fff;
+
   font-family:
     -apple-system,
     BlinkMacSystemFont,
     "Helvetica Neue",
     Arial,
     sans-serif;
+
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+
+  overflow-x:hidden;
+}
+
+html{
+  background:#303030;
+}
+
+body{
+  min-height:100vh;
+  min-height:100dvh;
+
   font-size:15px;
+
   overflow-y:auto;
+  overscroll-behavior-x:none;
 }
 
 button,
@@ -61,7 +82,10 @@ input{
 
 button{
   cursor:pointer;
-  touch-action:manipulation;
+}
+
+img{
+  max-width:100%;
 }
 
 
@@ -71,13 +95,24 @@ button{
 
 .app{
   position:relative;
+
   width:100%;
   max-width:none;
+  min-width:0;
+
   min-height:100vh;
-  height:auto;
+  min-height:100dvh;
+
   margin:0;
-  padding:0 0 calc(70px + env(safe-area-inset-bottom));
+  padding:0;
+
+  padding-top:env(safe-area-inset-top);
+
+  padding-bottom:
+    calc(70px + env(safe-area-inset-bottom));
+
   background:#111;
+
   overflow-x:hidden;
 }
 
@@ -107,15 +142,15 @@ button{
 
   position:relative;
   z-index:20;
+
+  flex-shrink:0;
 }
 
 .menu,
 .more,
 .bell{
-  width:46px;
+  width:48px;
   height:48px;
-
-  flex:0 0 46px;
 
   border:0;
   background:transparent;
@@ -125,19 +160,22 @@ button{
   align-items:center;
   justify-content:center;
 
-  padding:0;
+  flex-shrink:0;
 }
 
 .menu{
-  font-size:28px;
+  font-size:29px;
+  line-height:1;
 }
 
 .more{
-  font-size:25px;
+  font-size:27px;
+  line-height:1;
 }
 
 .bell{
   font-size:25px;
+  line-height:1;
 }
 
 .logo{
@@ -146,21 +184,22 @@ button{
 
   object-fit:contain;
 
-  flex:0 0 42px;
+  flex-shrink:0;
 }
 
 .title{
-  min-width:0;
-  flex:1;
-
   font-size:27px;
   font-weight:700;
 
-  color:#fff;
+  flex:1;
+
+  min-width:0;
 
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
+
+  color:#fff;
 }
 
 
@@ -170,6 +209,7 @@ button{
 
 .subbar{
   width:100%;
+
   height:48px;
 
   background:#292929;
@@ -177,7 +217,7 @@ button{
   display:flex;
   align-items:center;
 
-  padding:4px 8px;
+  padding:0 8px;
 
   gap:8px;
 
@@ -185,6 +225,10 @@ button{
   overflow-y:hidden;
 
   scrollbar-width:none;
+
+  -webkit-overflow-scrolling:touch;
+
+  flex-shrink:0;
 }
 
 .subbar::-webkit-scrollbar{
@@ -192,8 +236,6 @@ button{
 }
 
 .sub{
-  height:40px;
-
   flex:0 0 auto;
 
   border:0;
@@ -203,9 +245,11 @@ button{
 
   border-radius:7px 7px 0 0;
 
-  padding:0 18px;
+  padding:11px 16px;
 
-  font-size:16px;
+  min-height:42px;
+
+  font-size:15px;
   font-weight:700;
 
   white-space:nowrap;
@@ -222,12 +266,7 @@ button{
 
 .screen{
   display:none;
-
   width:100%;
-  min-width:0;
-
-  height:auto;
-  min-height:0;
 }
 
 .screen.active{
@@ -236,12 +275,7 @@ button{
 
 .content{
   width:100%;
-  min-width:0;
-
-  height:auto;
-  min-height:0;
-
-  padding:5px 8px;
+  padding:5px;
 }
 
 
@@ -255,9 +289,9 @@ button{
   background:#fff;
   color:#222;
 
-  padding:14px 15px 18px;
+  padding:13px 14px 18px;
 
-  min-height:0;
+  min-height:182px;
 
   border:1px solid #aaa;
 }
@@ -265,30 +299,28 @@ button{
 .news h3{
   margin:0 0 8px;
 
-  font-size:28px;
-  line-height:1.15;
-
+  font-size:24px;
   font-weight:500;
 }
 
 .news p{
-  margin:7px 0;
+  margin:8px 0;
 
-  font-size:20px;
+  font-size:18px;
   line-height:1.3;
-
-  font-weight:500;
 }
 
 .news .news-icon{
   float:right;
 
   font-size:25px;
+
+  line-height:1;
 }
 
 
 /* =========================================================
-   APP TILES
+   TILES
 ========================================================= */
 
 .grid{
@@ -301,22 +333,23 @@ button{
 
   gap:10px;
 
-  padding:10px 8px;
+  padding:9px 5px;
 }
 
 .tile{
   width:100%;
-  min-width:0;
 
   min-height:125px;
 
   border:0;
-  border-radius:14px;
+
+  border-radius:10px;
 
   background:#fff;
   color:#222;
 
   display:flex;
+
   flex-direction:column;
 
   align-items:center;
@@ -344,7 +377,7 @@ button{
 }
 
 .tile .num{
-  font-size:50px;
+  font-size:31px;
 
   color:#bd004d;
 
@@ -352,9 +385,7 @@ button{
 }
 
 .tile small{
-  font-size:17px;
-
-  line-height:1.15;
+  font-size:14px;
 
   margin-top:8px;
 }
@@ -376,19 +407,19 @@ button{
 .timetable{
   width:100%;
 
-  background:#c9004f;
+  background:#bd004d;
 
-  padding:15px 14px 28px;
+  padding:14px 10px 35px;
 
   color:#fff;
 }
 
 .ttitle{
-  font-size:25px;
+  font-size:19px;
+
+  margin-bottom:18px;
 
   font-weight:700;
-
-  margin-bottom:20px;
 }
 
 .days{
@@ -397,14 +428,11 @@ button{
   grid-template-columns:
     repeat(3,minmax(0,1fr));
 
-  gap:8px;
+  gap:10px;
 }
 
 .day{
-  min-width:0;
-
-  font-size:20px;
-
+  font-size:17px;
   font-weight:700;
 }
 
@@ -413,7 +441,7 @@ button{
 
   margin-top:10px;
 
-  font-size:19px;
+  font-weight:500;
 }
 
 
@@ -422,20 +450,16 @@ button{
 ========================================================= */
 
 .section{
-  width:100%;
-
   padding:6px 5px;
 }
 
 .section h2{
-  font-size:22px;
+  font-size:20px;
 
   margin:6px 0 10px;
 }
 
 .cards{
-  width:100%;
-
   display:grid;
 
   grid-template-columns:
@@ -446,18 +470,18 @@ button{
 
 .ex{
   width:100%;
-  min-width:0;
 
   background:#fff;
   color:#222;
 
-  border-radius:14px;
+  border-radius:10px;
 
   min-height:120px;
 
   border:0;
 
   display:flex;
+
   flex-direction:column;
 
   align-items:center;
@@ -479,7 +503,7 @@ button{
 }
 
 .ex small{
-  font-size:15px;
+  font-size:13px;
 }
 
 
@@ -491,12 +515,10 @@ button{
   width:100%;
 
   background:#fff;
+
   color:#222;
 
-  min-height:0;
-  height:auto;
-
-  overflow:hidden;
+  min-height:735px;
 }
 
 .cal-toolbar{
@@ -611,14 +633,19 @@ button{
 
   grid-template-columns:
     repeat(7,minmax(0,1fr));
+
+  position:relative;
 }
 
-.columns div{
+.columns > div{
   border-right:1px solid #e5e5e5;
 }
 
 .nowline{
-  position:relative;
+  position:absolute;
+
+  left:0;
+  right:0;
 
   top:475px;
 
@@ -631,6 +658,7 @@ button{
   position:absolute;
 
   right:30%;
+
   top:-5px;
 
   width:10px;
@@ -653,8 +681,7 @@ button{
 
   color:#222;
 
-  min-height:0;
-  height:auto;
+  min-height:735px;
 
   padding:0 8px 20px;
 }
@@ -725,7 +752,7 @@ button{
 }
 
 
-/* PROFILE EDITING */
+/* EDITABLE PROFILE */
 
 .profile-row{
   display:block;
@@ -740,7 +767,7 @@ button{
 .profile-row b{
   display:block;
 
-  margin-bottom:4px;
+  margin-bottom:6px;
 }
 
 .profile-row input{
@@ -757,6 +784,12 @@ button{
   color:#222;
 
   font-size:15px;
+
+  outline:none;
+}
+
+.profile-row input:focus{
+  border-color:#ed0059;
 }
 
 .save-profile{
@@ -812,13 +845,16 @@ button{
   position:fixed;
 
   left:0;
+  right:0;
   bottom:0;
 
   width:100%;
 
-  height:70px;
+  height:
+    calc(70px + env(safe-area-inset-bottom));
 
-  padding-bottom:env(safe-area-inset-bottom);
+  padding-bottom:
+    env(safe-area-inset-bottom);
 
   background:#303030;
 
@@ -833,6 +869,8 @@ button{
 }
 
 .nav{
+  width:100%;
+
   border:0;
 
   background:none;
@@ -841,13 +879,25 @@ button{
 
   font-size:13px;
 
+  font-weight:500;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:2px;
+
   min-width:0;
 }
 
 .nav .nicon{
   display:block;
 
-  font-size:25px;
+  font-size:26px;
 
   line-height:27px;
 }
@@ -866,7 +916,7 @@ button{
 
   inset:0;
 
-  background:#0008;
+  background:rgba(0,0,0,.55);
 
   z-index:50;
 
@@ -880,9 +930,11 @@ button{
 }
 
 .side{
-  width:min(390px,86vw);
+  width:min(390px,83vw);
 
   height:100%;
+
+  padding-top:env(safe-area-inset-top);
 
   background:#333;
 
@@ -892,6 +944,8 @@ button{
   overflow-x:hidden;
 
   -webkit-overflow-scrolling:touch;
+
+  touch-action:pan-y;
 }
 
 .sidehead{
@@ -909,20 +963,19 @@ button{
 }
 
 .sidehead img{
-  width:62px;
-  height:62px;
+  width:56px;
+  height:56px;
 
   object-fit:contain;
+
+  flex-shrink:0;
 }
 
 .sidehead strong{
-  font-size:30px;
+  font-size:27px;
 
   color:#fff;
 }
-
-
-/* USER AREA */
 
 .user{
   background:#242424;
@@ -930,7 +983,7 @@ button{
   border-bottom:1px solid #444;
 }
 
-.user>button{
+.user > button{
   width:100%;
 
   border:0;
@@ -941,25 +994,23 @@ button{
 
   text-align:left;
 
-  font-size:17px;
+  font-size:16px;
 
-  padding:18px 14px;
+  padding:15px 14px;
+
+  min-height:54px;
 }
 
 .userlinks{
   display:none;
 
-  padding:5px 28px 15px 54px;
+  padding:5px 10px 10px 28px;
 }
 
 .userlinks button{
   display:block;
 
-  width:100%;
-
-  text-align:left;
-
-  padding:14px 0;
+  padding:13px 0;
 
   border:0;
 
@@ -967,24 +1018,23 @@ button{
 
   color:#ddd;
 
-  font-size:17px;
+  font-size:15px;
+
+  text-align:left;
 }
 
 .user.open .userlinks{
   display:block;
 }
 
-
-/* SIDE MENU GROUPS */
-
 .group{
-  padding:15px 28px 7px;
+  padding:12px 14px 4px;
 
   color:#aaa;
 
-  font-size:16px;
+  font-size:13px;
 
-  font-weight:500;
+  font-weight:600;
 }
 
 .sideitem{
@@ -998,11 +1048,11 @@ button{
 
   text-align:left;
 
-  padding:16px 28px;
+  padding:12px 16px;
 
-  font-size:17px;
+  font-size:15px;
 
-  min-height:55px;
+  min-height:48px;
 }
 
 .sideitem.active{
@@ -1018,7 +1068,9 @@ button{
   position:fixed;
 
   left:50%;
-  bottom:85px;
+
+  bottom:
+    calc(80px + env(safe-area-inset-bottom));
 
   transform:translateX(-50%);
 
@@ -1041,46 +1093,90 @@ button{
 
 
 /* =========================================================
-   PHONE SIZING
+   IPHONE / IOS STANDALONE MODE
 ========================================================= */
 
-@media(max-width:600px){
+@supports (-webkit-touch-callout:none){
 
-  .title{
-    font-size:26px;
+  html,
+  body{
+    width:100%;
+    min-width:100%;
+    max-width:100%;
+
+    -webkit-text-size-adjust:100%;
   }
 
-  .news h3{
-    font-size:25px;
+  .app{
+    width:100%;
+    max-width:none;
+
+    min-height:100vh;
+    min-height:100dvh;
+
+    padding-top:env(safe-area-inset-top);
+
+    padding-bottom:
+      calc(70px + env(safe-area-inset-bottom));
   }
 
-  .news p{
-    font-size:19px;
+  .top{
+    width:100%;
   }
 
-  .tile{
-    min-height:125px;
+  .subbar{
+    width:100%;
   }
 
-  .tile small{
-    font-size:16px;
+  main,
+  .screen,
+  .content{
+    width:100%;
+    max-width:none;
   }
 
-  .ttitle{
-    font-size:23px;
-  }
+  .bottom{
+    width:100%;
 
-  .day{
-    font-size:18px;
-  }
+    left:0;
+    right:0;
 
-  .day span{
-    font-size:17px;
+    transform:none;
   }
 }
 
 
-/* SMALL PHONES */
+/* =========================================================
+   HOME SCREEN STANDALONE MODE
+========================================================= */
+
+@media (display-mode:standalone){
+
+  html{
+    background:#303030;
+  }
+
+  body{
+    background:#111;
+  }
+
+  .app{
+    width:100%;
+    max-width:none;
+
+    min-height:100dvh;
+
+    padding-top:env(safe-area-inset-top);
+
+    padding-bottom:
+      calc(70px + env(safe-area-inset-bottom));
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
 
 @media(max-width:370px){
 
@@ -1095,34 +1191,20 @@ button{
   }
 
   .title{
-    font-size:23px;
+    font-size:24px;
   }
 
-  .sub{
-    padding:0 13px;
-    font-size:14px;
+  .news h3{
+    font-size:21px;
   }
 
   .news p{
-    font-size:17px;
+    font-size:16px;
   }
 
-}
-
-
-/* VERY TALL / WIDE PHONES */
-
-@media(min-width:601px){
-
-  .app{
-    max-width:520px;
-    margin:auto;
-  }
-
-  .bottom{
-    width:min(520px,100%);
-    left:50%;
-    transform:translateX(-50%);
+  .sub{
+    padding-left:13px;
+    padding-right:13px;
   }
 }
 
@@ -1145,37 +1227,33 @@ button{
   class="menu"
   id="menu"
   aria-label="Open menu"
->
-☰
+  type="button">
+  ☰
 </button>
 
 <img
   class="logo"
   src="myntu-logo.png"
-  alt="MyNTU"
->
+  alt="MyNTU">
 
 <div
   class="title"
-  id="pageTitle"
->
-Student
+  id="pageTitle">
+  Student
 </div>
 
 <button
   class="more"
   onclick="toast('More')"
-  aria-label="More"
->
-⋮
+  type="button">
+  ⋮
 </button>
 
 <button
   class="bell"
   onclick="toast('Notifications')"
-  aria-label="Notifications"
->
-♧
+  type="button">
+  ♧
 </button>
 
 </header>
@@ -1190,29 +1268,29 @@ Student
 <button
   class="sub active"
   data-screen="student"
->
-Student
+  type="button">
+  Student
 </button>
 
 <button
   class="sub"
   data-screen="course"
->
-My Course
+  type="button">
+  My Course
 </button>
 
 <button
   class="sub"
   data-screen="support"
->
-Student Support
+  type="button">
+  Student Support
 </button>
 
 <button
   class="sub"
   data-screen="extra"
->
-Extra-curricular
+  type="button">
+  Extra-curricular
 </button>
 
 </nav>
@@ -1227,8 +1305,7 @@ Extra-curricular
 
 <section
   id="student"
-  class="screen active content"
->
+  class="screen active content">
 
 <div class="news">
 
@@ -1254,7 +1331,7 @@ Whether you’re an experienced creative or looking for ways to meet like-minded
 <button
   class="tile pink"
   onclick="toast('You have 5 unread emails')"
->
+  type="button">
 
 <span class="num">
 5
@@ -1271,7 +1348,7 @@ Email
 <button
   class="tile"
   onclick="toast('Attendance opened')"
->
+  type="button">
 
 <span class="ico">
 ▧
@@ -1287,7 +1364,7 @@ Attendance
 <button
   class="tile"
   onclick="toast('NOW opened')"
->
+  type="button">
 
 <span class="num">
 NOW
@@ -1341,7 +1418,7 @@ Sun 13
 <button
   class="tile"
   onclick="toast('Assessment results')"
->
+  type="button">
 
 <span class="ico">
 ▤
@@ -1357,7 +1434,7 @@ Assessment results
 <button
   class="tile"
   onclick="toast('Student dashboard')"
->
+  type="button">
 
 <span class="ico">
 ◷
@@ -1373,7 +1450,7 @@ Student dashboard
 <button
   class="tile"
   onclick="toast('Tickets & events')"
->
+  type="button">
 
 <span class="ico">
 ▱
@@ -1396,8 +1473,7 @@ Tickets &amp; events
 
 <section
   id="course"
-  class="screen content"
->
+  class="screen content">
 
 <div class="section">
 
@@ -1407,8 +1483,7 @@ My Course
 
 <div
   class="tile"
-  style="width:100%;min-height:160px"
->
+  style="width:100%;min-height:160px">
 
 <span class="ico">
 ▣
@@ -1431,8 +1506,7 @@ Course information
 
 <section
   id="support"
-  class="screen content"
->
+  class="screen content">
 
 <div class="section">
 
@@ -1442,62 +1516,62 @@ Student Support - light
 
 <div class="cards">
 
-<button class="ex" onclick="toast('Employability')">
+<button class="ex" onclick="toast('Employability')" type="button">
 <span class="ico">〽</span>
 <small>Employability</small>
 </button>
 
-<button class="ex" onclick="toast('Money')">
+<button class="ex" onclick="toast('Money')" type="button">
 <span class="ico">▱</span>
 <small>Money</small>
 </button>
 
-<button class="ex" onclick="toast('Student card top up')">
+<button class="ex" onclick="toast('Student card top up')" type="button">
 <span class="ico">▤</span>
 <small>Student card top up</small>
 </button>
 
-<button class="ex" onclick="toast('Wellbeing toolkit')">
+<button class="ex" onclick="toast('Wellbeing toolkit')" type="button">
 <span class="ico">♡</span>
 <small>Wellbeing toolkit</small>
 </button>
 
-<button class="ex" onclick="toast('Get wellbeing help')">
+<button class="ex" onclick="toast('Get wellbeing help')" type="button">
 <span class="ico">♡</span>
 <small>Get wellbeing help</small>
 </button>
 
-<button class="ex" onclick="toast('Disability inclusion')">
+<button class="ex" onclick="toast('Disability inclusion')" type="button">
 <span class="ico">✣</span>
 <small>Disability inclusion</small>
 </button>
 
-<button class="ex" onclick="toast('Exam support')">
+<button class="ex" onclick="toast('Exam support')" type="button">
 <span class="ico">☷</span>
 <small>Exam support</small>
 </button>
 
-<button class="ex" onclick="toast('StudentHub')">
+<button class="ex" onclick="toast('StudentHub')" type="button">
 <span class="ico">▱</span>
 <small>StudentHub</small>
 </button>
 
-<button class="ex" onclick="toast('MyStudentRecord')">
+<button class="ex" onclick="toast('MyStudentRecord')" type="button">
 <span class="ico">▧</span>
 <small>MyStudentRecord</small>
 </button>
 
-<button class="ex" onclick="toast('Report + Support')">
+<button class="ex" onclick="toast('Report + Support')" type="button">
 <span class="ico">◁</span>
 <small>Report + Support</small>
 </button>
 
-<button class="ex" onclick="toast('Safety on campus')">
+<button class="ex" onclick="toast('Safety on campus')" type="button">
 <span class="ico">♢</span>
 <small>Safety on campus</small>
 </button>
 
-<button class="ex" onclick="toast('Visa / Immigration')">
+<button class="ex" onclick="toast('Visa / Immigration')" type="button">
 <span class="ico">▤</span>
 <small>Visa / Immigration</small>
 </button>
@@ -1515,8 +1589,7 @@ Student Support - light
 
 <section
   id="extra"
-  class="screen content"
->
+  class="screen content">
 
 <div class="section">
 
@@ -1526,72 +1599,72 @@ Extracurricular - light
 
 <div class="cards">
 
-<button class="ex" onclick="toast('Latest news')">
+<button class="ex" onclick="toast('Latest news')" type="button">
 <span class="ico">▤</span>
 <small>Latest news</small>
 </button>
 
-<button class="ex" onclick="toast('NTU student life')">
+<button class="ex" onclick="toast('NTU student life')" type="button">
 <span class="ico">◔</span>
 <small>NTU student life</small>
 </button>
 
-<button class="ex" onclick="toast('Job opportunities')">
+<button class="ex" onclick="toast('Job opportunities')" type="button">
 <span class="ico">♧</span>
 <small>Job opportunities</small>
 </button>
 
-<button class="ex" onclick="toast('NTU Sport')">
+<button class="ex" onclick="toast('NTU Sport')" type="button">
 <span class="ico">NTU</span>
 <small>NTU Sport</small>
 </button>
 
-<button class="ex" onclick="toast('LIVE LEARN WORK')">
+<button class="ex" onclick="toast('LIVE LEARN WORK')" type="button">
 <span class="ico">◈</span>
 <small>LIVE<br>LEARN<br>WORK</small>
 </button>
 
-<button class="ex" onclick="toast('Student benefits')">
+<button class="ex" onclick="toast('Student benefits')" type="button">
 <span class="ico">☆</span>
 <small>Student benefits</small>
 </button>
 
-<button class="ex" onclick="toast('Student Union')">
+<button class="ex" onclick="toast('Student Union')" type="button">
 <span class="ico">NISU</span>
 <small>Student Union</small>
 </button>
 
-<button class="ex" onclick="toast('Study abroad')">
+<button class="ex" onclick="toast('Study abroad')" type="button">
 <span class="ico">▣</span>
 <small>Study abroad</small>
 </button>
 
-<button class="ex" onclick="toast('Travel')">
+<button class="ex" onclick="toast('Travel')" type="button">
 <span class="ico">✈</span>
 <small>Travel</small>
 </button>
 
-<button class="ex" onclick="toast('Global lounges')">
+<button class="ex" onclick="toast('Global lounges')" type="button">
 <span class="ico">◎</span>
 <small>Global lounges</small>
 </button>
 
-<button class="ex" onclick="toast('NTU Moves')">
+<button class="ex" onclick="toast('NTU Moves')" type="button">
 <span class="ico">♙</span>
 <small>NTU Moves</small>
 </button>
 
-<button class="ex" onclick="toast('NTU Arts')">
+<button class="ex" onclick="toast('NTU Arts')" type="button">
 <span class="ico">NTU</span>
 <small>NTU Arts</small>
 </button>
 
-<button class="ex" onclick="toast('Volunteering')">
+<button class="ex" onclick="toast('Volunteering')" type="button">
 <span class="ico">⌂</span>
 <small>Volunteering</small>
 </button>
 
-<button class="ex" onclick="toast('NTU Food')">
+<button class="ex" onclick="toast('NTU Food')" type="button">
 <span class="ico">♜</span>
 <small>NTU Food</small>
 </button>
@@ -1609,14 +1682,13 @@ Extracurricular - light
 
 <section
   id="calendar"
-  class="screen content"
->
+  class="screen content">
 
 <div class="calendar">
 
 <div class="cal-toolbar">
 
-<button class="week-select">
+<button class="week-select" type="button">
 ▦ &nbsp; Week⌄
 </button>
 
@@ -1625,7 +1697,7 @@ Extracurricular - light
 
 <div class="cal-head">
 
-<button class="cal-nav">
+<button class="cal-nav" type="button">
 ‹
 </button>
 
@@ -1633,7 +1705,7 @@ Extracurricular - light
 September&nbsp; 2026
 </div>
 
-<button class="cal-nav">
+<button class="cal-nav" type="button">
 Today&nbsp; ›
 </button>
 
@@ -1721,13 +1793,13 @@ Today&nbsp; ›
 
 <section
   id="profile"
-  class="screen content"
->
+  class="screen content">
 
 <div class="profile-page">
 
 
 <div class="profile-card">
+
 
 <div class="profile-user">
 
@@ -1739,15 +1811,13 @@ Today&nbsp; ›
 
 <div
   class="profile-user-name"
-  id="profileDisplayName"
->
+  id="profileDisplayName">
 Emmanuel Morton
 </div>
 
 <div
   class="profile-user-id"
-  id="profileDisplayId"
->
+  id="profileDisplayId">
 2025 (N1388236)
 </div>
 
@@ -1766,8 +1836,7 @@ Given name
   id="givenName"
   type="text"
   value="Emmanuel"
-  placeholder="Given name"
->
+  placeholder="Given name">
 
 </div>
 
@@ -1782,8 +1851,7 @@ Family name
   id="familyName"
   type="text"
   value="Morton"
-  placeholder="Family name"
->
+  placeholder="Family name">
 
 </div>
 
@@ -1798,8 +1866,7 @@ Student ID
   id="studentId"
   type="text"
   value="N1388236"
-  placeholder="Student ID"
->
+  placeholder="Student ID">
 
 </div>
 
@@ -1814,8 +1881,7 @@ Academic year
   id="academicYear"
   type="text"
   value="2025"
-  placeholder="Academic year"
->
+  placeholder="Academic year">
 
 </div>
 
@@ -1823,7 +1889,7 @@ Academic year
 <button
   class="save-profile"
   onclick="saveProfile()"
->
+  type="button">
 Save profile
 </button>
 
@@ -1879,7 +1945,7 @@ UserRead
 <button
   class="nav active"
   data-screen="student"
->
+  type="button">
 
 <span class="nicon">
 ⌂
@@ -1893,7 +1959,7 @@ Home
 <button
   class="nav"
   data-screen="calendar"
->
+  type="button">
 
 <span class="nicon">
 ▣
@@ -1907,7 +1973,7 @@ Calendar
 <button
   class="nav"
   data-screen="support"
->
+  type="button">
 
 <span class="nicon">
 □
@@ -1921,7 +1987,7 @@ Email
 <button
   class="nav"
   data-screen="profile"
->
+  type="button">
 
 <span class="nicon">
 ●
@@ -1942,8 +2008,7 @@ StudentHub
 
 <div
   class="drawer"
-  id="drawer"
->
+  id="drawer">
 
 <aside class="side">
 
@@ -1952,8 +2017,7 @@ StudentHub
 
 <img
   src="myntu-logo.png"
-  alt="MyNTU"
->
+  alt="MyNTU">
 
 <strong>
 MyNTU
@@ -1964,12 +2028,11 @@ MyNTU
 
 <div
   class="user"
-  id="user"
->
+  id="user">
 
 <button
   id="userToggle"
->
+  type="button">
 
 <span>◉</span>
 &nbsp;
@@ -1987,35 +2050,35 @@ Emmanuel Morton 2025 (N1388236)
 
 <div class="userlinks">
 
-<button data-screen="profile">
+<button data-screen="profile" type="button">
 Profile
 </button>
 
-<button onclick="toast('Preferences')">
+<button onclick="toast('Preferences')" type="button">
 Preferences
 </button>
 
-<button onclick="toast('Reload app')">
+<button onclick="toast('Reload app')" type="button">
 Reload app
 </button>
 
-<button onclick="toast('Services')">
+<button onclick="toast('Services')" type="button">
 Services
 </button>
 
-<button onclick="toast('Active sessions')">
+<button onclick="toast('Active sessions')" type="button">
 Active sessions
 </button>
 
-<button onclick="toast('Privacy policy')">
+<button onclick="toast('Privacy policy')" type="button">
 Privacy policy
 </button>
 
-<button onclick="toast('About')">
+<button onclick="toast('About')" type="button">
 About
 </button>
 
-<button onclick="toast('Signed out')">
+<button onclick="toast('Signed out')" type="button">
 Sign out
 </button>
 
@@ -2031,7 +2094,7 @@ DASHBOARDS
 <button
   class="sideitem active"
   data-screen="student"
->
+  type="button">
 ⌂ &nbsp; Student
 </button>
 
@@ -2040,24 +2103,27 @@ DASHBOARDS
 APPS
 </div>
 
+
 <button
   class="sideitem"
   data-screen="student"
->
+  type="button">
 ▣ &nbsp; Latest news
 </button>
 
-<button
-  class="sideitem"
-  data-screen="student"
->
-♧ &nbsp; StudentLight-AppTileAssessmentResults
-</button>
 
 <button
   class="sideitem"
   data-screen="student"
->
+  type="button">
+♧ &nbsp; StudentLight-AppTileAssessmentResults
+</button>
+
+
+<button
+  class="sideitem"
+  data-screen="student"
+  type="button">
 
 ♧ &nbsp; StudentLight-AppTileEmail
 
@@ -2066,9 +2132,8 @@ APPS
     float:right;
     background:#27b9df;
     border-radius:12px;
-    padding:2px 7px
-  "
->
+    padding:2px 7px;
+  ">
 5
 </span>
 
@@ -2085,7 +2150,7 @@ APPS
 <script>
 
 /* =========================================================
-   NAVIGATION
+   PAGE NAVIGATION
 ========================================================= */
 
 const pages =
@@ -2096,6 +2161,9 @@ const controls =
 
 const drawer =
   document.getElementById('drawer');
+
+const side =
+  document.querySelector('.side');
 
 const user =
   document.getElementById('user');
@@ -2113,7 +2181,7 @@ const titles = {
 
   course:'My Course',
 
-  support:'Student support - light',
+  support:'Student Support - light',
 
   extra:'Extracurricular - light',
 
@@ -2131,58 +2199,46 @@ const titles = {
 function loadProfile(){
 
   const savedGiven =
-    localStorage.getItem(
-      'myntu_given_name'
-    );
+    localStorage.getItem('myntu_given_name');
 
   const savedFamily =
-    localStorage.getItem(
-      'myntu_family_name'
-    );
+    localStorage.getItem('myntu_family_name');
 
   const savedId =
-    localStorage.getItem(
-      'myntu_student_id'
-    );
+    localStorage.getItem('myntu_student_id');
 
   const savedYear =
-    localStorage.getItem(
-      'myntu_academic_year'
-    );
+    localStorage.getItem('myntu_academic_year');
 
 
   if(savedGiven){
 
-    document.getElementById(
-      'givenName'
-    ).value = savedGiven;
+    document.getElementById('givenName').value =
+      savedGiven;
 
   }
 
 
   if(savedFamily){
 
-    document.getElementById(
-      'familyName'
-    ).value = savedFamily;
+    document.getElementById('familyName').value =
+      savedFamily;
 
   }
 
 
   if(savedId){
 
-    document.getElementById(
-      'studentId'
-    ).value = savedId;
+    document.getElementById('studentId').value =
+      savedId;
 
   }
 
 
   if(savedYear){
 
-    document.getElementById(
-      'academicYear'
-    ).value = savedYear;
+    document.getElementById('academicYear').value =
+      savedYear;
 
   }
 
@@ -2199,30 +2255,22 @@ function loadProfile(){
 function updateStudentDetails(){
 
   const given =
-    document.getElementById(
-      'givenName'
-    )?.value ||
+    document.getElementById('givenName')?.value ||
     'Emmanuel';
 
 
   const family =
-    document.getElementById(
-      'familyName'
-    )?.value ||
+    document.getElementById('familyName')?.value ||
     'Morton';
 
 
   const id =
-    document.getElementById(
-      'studentId'
-    )?.value ||
+    document.getElementById('studentId')?.value ||
     'N1388236';
 
 
   const year =
-    document.getElementById(
-      'academicYear'
-    )?.value ||
+    document.getElementById('academicYear')?.value ||
     '2025';
 
 
@@ -2363,11 +2411,11 @@ function saveProfile(){
 function show(name){
 
   pages.forEach(
-    page => {
+    p => {
 
-      page.classList.toggle(
+      p.classList.toggle(
         'active',
-        page.id === name
+        p.id === name
       );
 
     }
@@ -2375,11 +2423,11 @@ function show(name){
 
 
   controls.forEach(
-    control => {
+    c => {
 
-      control.classList.toggle(
+      c.classList.toggle(
         'active',
-        control.dataset.screen === name
+        c.dataset.screen === name
       );
 
     }
@@ -2392,7 +2440,14 @@ function show(name){
     titles[name] || 'Student';
 
 
-  closeDrawer();
+  drawer.classList.remove(
+    'open'
+  );
+
+
+  user.classList.remove(
+    'open'
+  );
 
 
   window.scrollTo({
@@ -2411,18 +2466,18 @@ function show(name){
 
 
 /* =========================================================
-   NAV BUTTONS
+   NAVIGATION BUTTONS
 ========================================================= */
 
 controls.forEach(
-  control => {
+  c => {
 
-    control.addEventListener(
+    c.addEventListener(
       'click',
       () => {
 
         show(
-          control.dataset.screen
+          c.dataset.screen
         );
 
       }
@@ -2433,48 +2488,16 @@ controls.forEach(
 
 
 /* =========================================================
-   OPEN DRAWER
+   OPEN MENU
 ========================================================= */
-
-function openDrawer(){
-
-  drawer.classList.add('open');
-
-}
-
-
-/* =========================================================
-   CLOSE DRAWER
-========================================================= */
-
-function closeDrawer(){
-
-  drawer.classList.remove('open');
-
-}
-
-
-/* MENU BUTTON */
 
 menu.addEventListener(
   'click',
-  openDrawer
-);
+  function(){
 
-
-/* CLOSE BY TAPPING OUTSIDE */
-
-drawer.addEventListener(
-  'click',
-  event => {
-
-    if(
-      event.target === drawer
-    ){
-
-      closeDrawer();
-
-    }
+    drawer.classList.add(
+      'open'
+    );
 
   }
 );
@@ -2486,47 +2509,50 @@ drawer.addEventListener(
 
 userToggle.addEventListener(
   'click',
-  event => {
+  function(){
 
-    event.stopPropagation();
-
-    user.classList.toggle('open');
+    user.classList.toggle(
+      'open'
+    );
 
   }
 );
 
 
 /* =========================================================
-   SWIPE GESTURE
-=========================================================
+   CLOSE DRAWER BY TAPPING OUTSIDE
+========================================================= */
 
-   This gives you a backup if the three-line button
-   is difficult to tap.
+drawer.addEventListener(
+  'click',
+  function(e){
 
-   A horizontal swipe anywhere on the HOME SCREEN
-   will open the drawer.
+    if(e.target === drawer){
 
-   A horizontal swipe in the opposite direction while
-   the drawer is open will close it.
+      drawer.classList.remove(
+        'open'
+      );
 
+    }
+
+  }
+);
+
+
+/* =========================================================
+   SWIPE FROM LEFT EDGE TO OPEN MENU
 ========================================================= */
 
 let touchStartX = 0;
 let touchStartY = 0;
+let touchTracking = false;
 
-let touchStartTime = 0;
-
-
-/* START TOUCH */
 
 document.addEventListener(
   'touchstart',
-  event => {
+  function(e){
 
-    if(
-      !event.touches ||
-      !event.touches.length
-    ){
+    if(e.touches.length !== 1){
 
       return;
 
@@ -2534,13 +2560,15 @@ document.addEventListener(
 
 
     touchStartX =
-      event.touches[0].clientX;
+      e.touches[0].clientX;
+
 
     touchStartY =
-      event.touches[0].clientY;
+      e.touches[0].clientY;
 
-    touchStartTime =
-      Date.now();
+
+    touchTracking =
+      touchStartX <= 35;
 
   },
   {
@@ -2549,16 +2577,11 @@ document.addEventListener(
 );
 
 
-/* END TOUCH */
-
 document.addEventListener(
   'touchend',
-  event => {
+  function(e){
 
-    if(
-      !event.changedTouches ||
-      !event.changedTouches.length
-    ){
+    if(!touchTracking){
 
       return;
 
@@ -2566,90 +2589,91 @@ document.addEventListener(
 
 
     const endX =
-      event.changedTouches[0].clientX;
+      e.changedTouches[0].clientX;
+
 
     const endY =
-      event.changedTouches[0].clientY;
+      e.changedTouches[0].clientY;
 
 
-    const deltaX =
+    const distanceX =
       endX - touchStartX;
 
-    const deltaY =
-      endY - touchStartY;
 
+    const distanceY =
+      Math.abs(
+        endY - touchStartY
+      );
 
-    const elapsed =
-      Date.now() - touchStartTime;
-
-
-    const horizontal =
-      Math.abs(deltaX) >
-      Math.abs(deltaY);
-
-
-    const distance =
-      Math.abs(deltaX);
-
-
-    /*
-      Only recognise a deliberate,
-      reasonably quick horizontal swipe.
-    */
 
     if(
-      !horizontal ||
-      distance < 65 ||
-      elapsed > 700
+      distanceX > 70 &&
+      distanceX > distanceY
     ){
+
+      drawer.classList.add(
+        'open'
+      );
+
+    }
+
+
+    touchTracking = false;
+
+  },
+  {
+    passive:true
+  }
+);
+
+
+/* =========================================================
+   SWIPE RIGHT TO CLOSE MENU
+========================================================= */
+
+let drawerStartX = 0;
+
+
+side.addEventListener(
+  'touchstart',
+  function(e){
+
+    if(e.touches.length === 1){
+
+      drawerStartX =
+        e.touches[0].clientX;
+
+    }
+
+  },
+  {
+    passive:true
+  }
+);
+
+
+side.addEventListener(
+  'touchend',
+  function(e){
+
+    if(e.changedTouches.length !== 1){
 
       return;
 
     }
 
 
-    /*
-      If the drawer is already open,
-      swipe either direction to close it.
-    */
-
-    if(
-      drawer.classList.contains('open')
-    ){
-
-      if(distance >= 65){
-
-        closeDrawer();
-
-      }
-
-      return;
-
-    }
-
-
-    /*
-      Drawer is closed.
-
-      Open it from a horizontal swipe
-      while the user is on the Student/Home
-      screen.
-
-      This intentionally supports BOTH directions
-      so you have a backup if one direction feels
-      more natural on the phone.
-    */
-
-    const studentScreen =
-      document.getElementById('student');
+    const endX =
+      e.changedTouches[0].clientX;
 
 
     if(
-      studentScreen &&
-      studentScreen.classList.contains('active')
+      drawerStartX - endX > 70
     ){
 
-      openDrawer();
+      drawer.classList.remove(
+        'open'
+      );
 
     }
 
@@ -2687,7 +2711,7 @@ function toast(message){
 
   window.toastTimer =
     setTimeout(
-      () => {
+      function(){
 
         t.style.display =
           'none';
