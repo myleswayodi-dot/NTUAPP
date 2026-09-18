@@ -1,13 +1,33 @@
 <!doctype html>
 <html lang="en">
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta
+  name="viewport"
+  content="width=device-width,
+  initial-scale=1,
+  maximum-scale=1,
+  viewport-fit=cover"
+>
 
 <meta name="theme-color" content="#303030">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="MyNTU">
+
+<meta
+  name="apple-mobile-web-app-capable"
+  content="yes"
+>
+
+<meta
+  name="apple-mobile-web-app-status-bar-style"
+  content="black-translucent"
+>
+
+<meta
+  name="apple-mobile-web-app-title"
+  content="MyNTU"
+>
 
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="myntu-logo.png">
@@ -16,20 +36,46 @@
 <title>MyNTU</title>
 
 <style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
 *{
   box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
+html{
+  width:100%;
+  min-height:100%;
   margin:0;
   padding:0;
+  overflow-x:hidden;
   background:#111;
-  color:#fff;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;
 }
 
 body{
+  width:100%;
+  min-width:0;
+  min-height:100vh;
+  margin:0;
+  padding:0;
+  overflow-x:hidden;
+  background:#111;
+  color:#fff;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
   font-size:15px;
+
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
 }
 
 button,
@@ -39,16 +85,21 @@ input{
 
 button{
   cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+
+img{
+  max-width:100%;
 }
 
 .app{
   width:100%;
-  max-width:520px;
+  max-width:none;
   min-height:100vh;
-  margin:auto;
+  margin:0;
+  padding:0 0 calc(70px + env(safe-area-inset-bottom));
   background:#111;
-  padding-bottom:68px;
+  overflow-x:hidden;
 }
 
 
@@ -57,33 +108,55 @@ button{
 ========================================================= */
 
 .top{
+  width:100%;
   height:82px;
+
   background:#303030;
+
   display:flex;
   align-items:center;
-  padding:10px 9px;
-  gap:10px;
+
+  padding:
+    8px
+    max(8px, env(safe-area-inset-right))
+    8px
+    max(8px, env(safe-area-inset-left));
+
+  gap:6px;
+
   border-bottom:1px solid #444;
+
   position:sticky;
   top:0;
+
   z-index:20;
+
+  overflow:hidden;
 }
 
 .menu,
 .more,
 .bell{
-  width:48px;
-  height:48px;
+  width:44px;
+  min-width:44px;
+  height:44px;
+
+  padding:0;
+
   border:0;
   background:transparent;
   color:#fff;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
+  flex-shrink:0;
 }
 
 .menu{
-  font-size:28px;
+  font-size:27px;
+  line-height:1;
 }
 
 .more{
@@ -95,42 +168,82 @@ button{
 }
 
 .logo{
-  width:42px;
-  height:42px;
+  width:40px;
+  height:40px;
+
+  flex:0 0 40px;
+
   object-fit:contain;
 }
 
 .title{
-  font-size:27px;
-  font-weight:700;
+  min-width:0;
   flex:1;
-  color:#000;
+
+  font-size:27px;
+  line-height:1.1;
+
+  font-weight:700;
+
+  color:#fff;
+
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 
 /* =========================================================
-   SUB NAVIGATION
+   TOP APP NAVIGATION
 ========================================================= */
 
 .subbar{
-  height:48px;
-  background:#292929;
+  width:100%;
+  height:76px;
+
+  background:#111;
+
   display:flex;
   align-items:center;
-  padding:0 8px;
-  gap:5px;
-  overflow:auto;
+
+  padding:
+    8px
+    max(8px, env(safe-area-inset-right))
+    8px
+    max(8px, env(safe-area-inset-left));
+
+  gap:8px;
+
+  overflow-x:auto;
+  overflow-y:hidden;
+
+  scrollbar-width:none;
+}
+
+.subbar::-webkit-scrollbar{
+  display:none;
 }
 
 .sub{
+  flex:0 0 auto;
+
   border:0;
+
   color:#fff;
   background:#555;
-  border-radius:6px 6px 0 0;
-  padding:11px 15px;
-  font-size:12px;
+
+  border-radius:8px 8px 0 0;
+
+  padding:13px 20px;
+
+  font-size:17px;
+  line-height:1;
+
   font-weight:700;
+
   white-space:nowrap;
+
+  min-height:60px;
 }
 
 .sub.active{
@@ -144,6 +257,8 @@ button{
 
 .screen{
   display:none;
+  width:100%;
+  min-width:0;
 }
 
 .screen.active{
@@ -151,7 +266,9 @@ button{
 }
 
 .content{
-  padding:5px;
+  width:100%;
+  min-width:0;
+  padding:0 8px;
 }
 
 
@@ -160,28 +277,46 @@ button{
 ========================================================= */
 
 .news{
+  width:100%;
+
   background:#fff;
   color:#222;
-  padding:8px 9px 14px;
-  min-height:182px;
+
+  padding:14px 16px 18px;
+
+  min-height:0;
+
   border:1px solid #aaa;
+
+  overflow:hidden;
 }
 
 .news h3{
-  margin:0 0 4px;
-  font-size:16px;
+  margin:0 0 10px;
+
+  font-size:28px;
+  line-height:1.15;
+
   font-weight:500;
 }
 
 .news p{
-  margin:4px 0;
-  font-size:17px;
-  line-height:1.28;
+  margin:8px 0;
+
+  font-size:23px;
+  line-height:1.32;
+
+  font-weight:500;
 }
 
 .news .news-icon{
   float:right;
-  font-size:20px;
+
+  font-size:25px;
+
+  line-height:1;
+
+  margin-left:8px;
 }
 
 
@@ -190,44 +325,73 @@ button{
 ========================================================= */
 
 .grid{
+  width:100%;
+
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  padding:9px 5px;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:16px;
+
+  padding:16px 8px;
 }
 
 .tile{
-  min-height:125px;
+  width:100%;
+  min-width:0;
+
+  min-height:205px;
+
   border:0;
-  border-radius:10px;
+  border-radius:15px;
+
   background:#fff;
   color:#222;
+
   display:flex;
   flex-direction:column;
+
   align-items:center;
   justify-content:center;
+
   text-align:center;
-  padding:8px;
+
+  padding:12px;
+
   font-weight:700;
+
   box-shadow:0 1px 2px #0004;
+
+  overflow:hidden;
 }
 
 .tile .ico{
-  font-size:38px;
+  font-size:42px;
+
   color:#bd004d;
+
   line-height:1;
-  margin-bottom:10px;
+
+  margin-bottom:18px;
 }
 
 .tile .num{
-  font-size:31px;
+  font-size:48px;
+
   color:#bd004d;
+
   line-height:1;
+
+  font-weight:800;
 }
 
 .tile small{
-  font-size:12px;
-  margin-top:8px;
+  font-size:19px;
+
+  line-height:1.25;
+
+  margin-top:13px;
 }
 
 .tile.pink{
@@ -245,29 +409,57 @@ button{
 ========================================================= */
 
 .timetable{
+  width:100%;
+
   background:#bd004d;
-  padding:9px 8px 35px;
+
+  padding:
+    18px
+    14px
+    30px;
+
   color:#fff;
+
+  overflow:hidden;
 }
 
 .ttitle{
-  font-size:16px;
-  margin-bottom:12px;
+  font-size:27px;
+
+  line-height:1.2;
+
+  margin-bottom:22px;
+
+  font-weight:600;
 }
 
 .days{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:14px;
 }
 
 .day{
-  font-size:15px;
+  min-width:0;
+
+  font-size:23px;
+
+  line-height:1.2;
+
+  font-weight:600;
 }
 
 .day span{
   display:block;
-  margin-top:5px;
+
+  margin-top:12px;
+
+  font-size:20px;
+
+  line-height:1.25;
 }
 
 
@@ -276,43 +468,67 @@ button{
 ========================================================= */
 
 .section{
-  padding:6px 5px;
+  width:100%;
+  padding:8px 0;
 }
 
 .section h2{
-  font-size:18px;
-  margin:6px 0 8px;
+  font-size:24px;
+
+  margin:8px 0 14px;
 }
 
 .cards{
+  width:100%;
+
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:16px;
 }
 
 .ex{
+  width:100%;
+  min-width:0;
+
   background:#fff;
   color:#222;
-  border-radius:10px;
-  min-height:120px;
+
+  border-radius:15px;
+
+  min-height:180px;
+
   border:0;
+
   display:flex;
   flex-direction:column;
+
   align-items:center;
   justify-content:center;
+
   text-align:center;
-  padding:8px;
+
+  padding:12px;
+
   font-weight:700;
+
+  overflow:hidden;
 }
 
 .ex .ico{
-  font-size:34px;
+  font-size:38px;
+
   color:#bd004d;
-  margin-bottom:8px;
+
+  margin-bottom:14px;
 }
 
 .ex small{
-  font-size:12px;
+  font-size:17px;
+
+  line-height:1.25;
 }
 
 
@@ -321,29 +537,42 @@ button{
 ========================================================= */
 
 .calendar{
+  width:100%;
+
   background:#fff;
   color:#222;
+
   min-height:735px;
+
+  overflow:hidden;
 }
 
 .cal-toolbar{
   padding:10px;
+
   border-bottom:1px solid #ddd;
 }
 
 .week-select{
   border:1px solid #bbb;
+
   background:#fff;
+
   border-radius:22px;
+
   padding:8px 14px;
+
   color:#333;
 }
 
 .cal-head{
   display:flex;
+
   justify-content:space-between;
   align-items:center;
+
   padding:20px 15px 10px;
+
   font-weight:700;
 }
 
@@ -353,44 +582,62 @@ button{
 
 .cal-nav{
   border:0;
+
   background:none;
+
   font-size:25px;
+
   color:#333;
 }
 
 .weekdays,
 .dates{
   display:grid;
-  grid-template-columns:repeat(7,1fr);
+
+  grid-template-columns:
+    repeat(7,minmax(0,1fr));
+
   text-align:center;
 }
 
 .weekdays{
   font-weight:700;
+
   padding:8px 0;
 }
 
 .dates div{
   padding:7px 0;
+
   font-weight:600;
 }
 
 .today{
   display:inline-flex;
+
   width:30px;
   height:30px;
+
   border-radius:50%;
+
   background:#1976d2;
+
   color:#fff;
+
   align-items:center;
   justify-content:center;
 }
 
 .timegrid{
   display:grid;
-  grid-template-columns:62px 1fr;
+
+  grid-template-columns:62px minmax(0,1fr);
+
   height:510px;
+
   border-top:1px solid #ddd;
+
+  overflow:hidden;
 }
 
 .times{
@@ -399,15 +646,25 @@ button{
 
 .times div{
   height:54px;
+
   text-align:right;
+
   padding:5px 8px;
+
   color:#666;
+
   font-size:13px;
 }
 
 .columns{
+  min-width:0;
+
   display:grid;
-  grid-template-columns:repeat(7,1fr);
+
+  grid-template-columns:
+    repeat(7,minmax(0,1fr));
+
+  position:relative;
 }
 
 .columns div{
@@ -415,19 +672,30 @@ button{
 }
 
 .nowline{
-  position:relative;
+  position:absolute;
+
+  left:0;
+  right:0;
+
   top:475px;
+
   height:2px;
+
   background:#1976d2;
 }
 
 .nowdot{
   position:absolute;
+
   right:30%;
+
   top:-5px;
+
   width:10px;
   height:10px;
+
   border-radius:50%;
+
   background:#1976d2;
 }
 
@@ -437,99 +705,143 @@ button{
 ========================================================= */
 
 .profile-page{
+  width:100%;
+
   background:#f5f5f5;
+
   color:#222;
+
   min-height:735px;
+
   padding:0 8px 20px;
 }
 
 .profile-card,
 .roles-card,
 .language-card{
-  background:#fff;
-  border-radius:6px;
-  margin:8px 0;
-  box-shadow:0 1px 4px #0002;
-}
+  width:100%;
 
-.profile-card{
+  background:#fff;
+
+  border-radius:6px;
+
+  margin:8px 0;
+
+  box-shadow:0 1px 4px #0002;
+
   overflow:hidden;
 }
 
 .profile-user{
   display:flex;
+
   align-items:center;
+
   gap:14px;
+
   padding:18px 15px;
+
   background:#292929;
+
   color:#fff;
 }
 
 .profile-avatar{
   width:42px;
   height:42px;
+
   border-radius:50%;
+
   background:#555;
+
   display:flex;
+
   align-items:center;
   justify-content:center;
+
   font-size:22px;
+
   flex-shrink:0;
 }
 
 .profile-user-name{
   font-size:18px;
+
   font-weight:600;
 }
 
 .profile-user-id{
   margin-top:3px;
+
   font-size:14px;
+
   color:#ccc;
 }
 
 .profile-row{
   display:block;
+
   padding:15px;
+
   border-bottom:1px solid #ddd;
+
   line-height:1.35;
 }
 
 .profile-row b{
   display:block;
+
   margin-bottom:4px;
 }
 
 .profile-row input{
   width:100%;
+
   padding:11px 12px;
+
   border:1px solid #bbb;
+
   border-radius:5px;
+
   background:#fff;
+
   color:#222;
+
   font-size:15px;
+
+  outline:none;
 }
 
-.profile-row:last-of-type{
-  border-bottom:0;
+.profile-row input:focus{
+  border-color:#bd004d;
 }
 
 .save-profile{
   width:calc(100% - 30px);
+
   margin:15px;
+
   padding:12px;
+
   border:0;
+
   border-radius:6px;
+
   background:#ed0059;
+
   color:#fff;
+
   font-size:16px;
+
   font-weight:700;
 }
 
 .roles-head,
 .language-head{
   padding:16px;
+
   border-bottom:1px solid #ddd;
+
   font-size:17px;
 }
 
@@ -552,28 +864,64 @@ button{
 
 .bottom{
   position:fixed;
+
+  left:0;
+  right:0;
   bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:min(520px,100%);
-  height:68px;
+
+  width:100%;
+
+  height:
+    calc(68px + env(safe-area-inset-bottom));
+
+  padding-bottom:
+    env(safe-area-inset-bottom);
+
   background:#303030;
+
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+
   z-index:30;
+
   border-top:1px solid #555;
 }
 
 .nav{
+  min-width:0;
+
   border:0;
+
   background:none;
+
   color:#fff;
-  font-size:11px;
+
+  font-size:14px;
+
+  font-weight:500;
+
+  padding:4px 2px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:2px;
+
+  overflow:hidden;
 }
 
 .nav .nicon{
   display:block;
-  font-size:25px;
+
+  font-size:26px;
+
   line-height:27px;
 }
 
@@ -583,16 +931,24 @@ button{
 
 
 /* =========================================================
-   SIDE MENU / DRAWER
-   MATCHES THE PROVIDED MYNTU SCREENSHOT
+   SIDE DRAWER
 ========================================================= */
 
 .drawer{
   position:fixed;
+
   inset:0;
-  background:rgba(0,0,0,.55);
+
+  width:100%;
+  height:100%;
+
+  background:#0008;
+
   z-index:50;
+
   display:none;
+
+  overflow:hidden;
 }
 
 .drawer.open{
@@ -600,104 +956,144 @@ button{
 }
 
 .side{
-  width:min(690px,calc(100vw - 18px));
+  width:83vw;
+  max-width:none;
+
   height:100%;
-  background:#313131;
-  box-shadow:6px 0 20px rgba(0,0,0,.65);
-  overflow:auto;
+
+  background:#292929;
+
+  box-shadow:6px 0 20px #0008;
+
+  overflow-x:hidden;
+  overflow-y:auto;
+
+  -webkit-overflow-scrolling:touch;
 }
 
 
-/* ---------------------------------------------------------
-   LIGHT GREY MYNTU HEADER
---------------------------------------------------------- */
+/* =========================================================
+   DRAWER HEADER
+========================================================= */
 
 .sidehead{
-  height:114px;
-  background:#c6c6c6;
+  width:100%;
+
+  height:184px;
+
+  background:#303030;
+
   display:flex;
+
   align-items:center;
-  padding:0 26px;
-  gap:20px;
+
+  padding:25px 32px;
+
+  gap:22px;
+
+  flex-shrink:0;
 }
 
 .sidehead img{
-  width:52px;
-  height:52px;
+  width:94px;
+  height:94px;
+
   object-fit:contain;
+
+  flex-shrink:0;
 }
 
 .sidehead strong{
-  font-size:48px;
-  line-height:1;
+  font-size:52px;
+
   font-weight:700;
+
   color:#000;
-  letter-spacing:-1.5px;
+
+  letter-spacing:-1px;
+
+  white-space:nowrap;
 }
 
 
-/* ---------------------------------------------------------
-   USER PROFILE BAR
---------------------------------------------------------- */
+/* =========================================================
+   USER AREA
+========================================================= */
 
 .user{
+  width:100%;
+
   background:#242424;
+
   border-bottom:1px solid #444;
 }
 
 .user>button{
   width:100%;
-  min-height:66px;
+
   border:0;
-  background:#3b3b3b;
-  color:#f4f4f4;
+
+  background:#242424;
+
+  color:#fff;
+
   text-align:left;
-  font-size:20px;
+
+  font-size:26px;
+
   font-weight:500;
-  padding:0 28px;
-  display:flex;
-  align-items:center;
-  gap:16px;
+
+  padding:27px 32px;
+
+  min-height:76px;
+
+  white-space:nowrap;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
 }
 
-.user>button .user-person-icon{
-  width:28px;
-  height:28px;
-  border:2px solid #eee;
-  border-radius:50%;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
+.user>button span:first-child{
+  font-size:28px;
 }
 
-.user>button .user-chevron{
-  margin-left:auto;
-  font-size:23px;
-  line-height:1;
+.user>button span:last-child{
+  float:right;
+
+  font-size:24px;
 }
 
 .userlinks{
   display:none;
-  padding:4px 0 8px;
-  background:#242424;
+
+  padding:
+    10px
+    0
+    18px
+    63px;
+
+  background:#292929;
 }
 
 .userlinks button{
   display:block;
-  width:100%;
-  padding:18px 55px;
-  border:0;
-  background:none;
-  color:#eee;
-  font-size:20px;
-  line-height:1.15;
-  text-align:left;
-  font-weight:400;
-}
 
-.userlinks button:active{
-  background:#333;
+  width:100%;
+
+  padding:17px 0;
+
+  border:0;
+
+  background:none;
+
+  color:#ddd;
+
+  text-align:left;
+
+  font-size:25px;
+
+  line-height:1.2;
 }
 
 .user.open .userlinks{
@@ -705,174 +1101,398 @@ button{
 }
 
 
-/* ---------------------------------------------------------
-   DRAWER SECTION HEADINGS
---------------------------------------------------------- */
+/* =========================================================
+   DRAWER GROUP HEADINGS
+========================================================= */
 
 .group{
-  padding:22px 28px 12px;
-  background:#303030;
-  color:#aaa;
-  font-size:19px;
-  line-height:1;
-  font-weight:400;
-  letter-spacing:.3px;
-}
-
-
-/* ---------------------------------------------------------
-   DRAWER ITEMS
---------------------------------------------------------- */
-
-.sideitem{
   width:100%;
-  min-height:64px;
-  border:0;
-  background:#444;
-  color:#fff;
-  text-align:left;
-  padding:0 28px;
-  font-size:20px;
+
+  padding:25px 32px 14px;
+
+  color:#aaa;
+
+  background:#333;
+
+  font-size:22px;
+
   font-weight:500;
-  display:flex;
-  align-items:center;
-  gap:17px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
 
-.sideitem + .sideitem{
-  border-top:1px solid rgba(255,255,255,.04);
-}
-
-.sideitem.active{
-  background:#505050;
-}
-
-
-/* ICONS */
-
-.drawer-icon{
-  width:28px;
-  min-width:28px;
-  height:28px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  color:#f4f4f4;
-  font-size:25px;
-  font-weight:400;
-}
-
-.home-icon{
-  font-size:27px;
-}
-
-.news-icon-drawer{
-  font-size:26px;
-}
-
-.clover-icon{
-  font-size:26px;
-}
-
-.email-badge{
-  margin-left:auto;
-  min-width:34px;
-  height:34px;
-  padding:0 8px;
-  border-radius:50%;
-  background:#27b9df;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:18px;
-  font-weight:600;
-}
-
-
-/* ---------------------------------------------------------
-   TOAST
---------------------------------------------------------- */
-
-#toast{
-  position:fixed;
-  left:50%;
-  bottom:80px;
-  transform:translateX(-50%);
-  background:#fff;
-  color:#222;
-  padding:10px 16px;
-  border-radius:20px;
-  display:none;
-  z-index:80;
-  font-weight:700;
+  letter-spacing:.2px;
 }
 
 
 /* =========================================================
-   SMALL SCREENS
+   DRAWER ITEMS
 ========================================================= */
 
-@media(max-width:520px){
+.sideitem{
+  width:100%;
 
-  .side{
-    width:calc(100vw - 18px);
-  }
+  border:0;
 
-  .sidehead{
-    height:114px;
-    padding:0 26px;
-  }
+  background:transparent;
 
-  .sidehead strong{
-    font-size:42px;
-  }
+  color:#fff;
 
-  .user>button{
-    font-size:18px;
-    padding-left:25px;
-    padding-right:25px;
-  }
+  text-align:left;
 
-  .userlinks button{
-    font-size:18px;
-    padding-left:55px;
-  }
+  padding:24px 32px;
 
-  .group{
-    font-size:18px;
-    padding-left:27px;
-  }
+  font-size:25px;
 
-  .sideitem{
-    font-size:18px;
-    padding-left:27px;
-  }
+  line-height:1.2;
+
+  min-height:72px;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+
+  white-space:nowrap;
 }
 
-@media(max-width:370px){
+.sideitem.active{
+  background:#4a4a4a;
+}
 
-  .grid,
-  .cards{
-    gap:6px;
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+#toast{
+  position:fixed;
+
+  left:50%;
+  bottom:
+    calc(78px + env(safe-area-inset-bottom));
+
+  transform:translateX(-50%);
+
+  max-width:90vw;
+
+  background:#fff;
+
+  color:#222;
+
+  padding:10px 16px;
+
+  border-radius:20px;
+
+  display:none;
+
+  z-index:80;
+
+  font-weight:700;
+
+  white-space:nowrap;
+}
+
+
+/* =========================================================
+   PHONE OPTIMISATION
+========================================================= */
+
+@media(max-width:600px){
+
+  .top{
+    height:76px;
+
+    padding-left:
+      max(6px,env(safe-area-inset-left));
+
+    padding-right:
+      max(6px,env(safe-area-inset-right));
   }
 
-  .tile,
-  .ex{
-    min-height:108px;
+  .menu,
+  .more,
+  .bell{
+    width:40px;
+    min-width:40px;
+    height:40px;
+  }
+
+  .menu{
+    font-size:25px;
+  }
+
+  .logo{
+    width:36px;
+    height:36px;
+    flex-basis:36px;
   }
 
   .title{
     font-size:24px;
   }
 
-  .sidehead strong{
-    font-size:35px;
+  .subbar{
+    height:70px;
+
+    padding:6px;
   }
+
+  .sub{
+    padding:12px 18px;
+
+    min-height:58px;
+
+    font-size:16px;
+  }
+
+  .content{
+    padding:0 8px;
+  }
+
+  .news{
+    padding:14px 16px 18px;
+  }
+
+  .news h3{
+    font-size:26px;
+  }
+
+  .news p{
+    font-size:21px;
+  }
+
+  .grid,
+  .cards{
+    gap:12px;
+
+    padding-left:8px;
+    padding-right:8px;
+  }
+
+  .tile{
+    min-height:180px;
+
+    border-radius:14px;
+  }
+
+  .tile .num{
+    font-size:44px;
+  }
+
+  .tile .ico{
+    font-size:37px;
+  }
+
+  .tile small{
+    font-size:16px;
+  }
+
+  .timetable{
+    padding:16px 14px 27px;
+  }
+
+  .ttitle{
+    font-size:23px;
+  }
+
+  .day{
+    font-size:19px;
+  }
+
+  .day span{
+    font-size:17px;
+  }
+
+  .ex{
+    min-height:165px;
+  }
+
+  .ex .ico{
+    font-size:34px;
+  }
+
+  .ex small{
+    font-size:15px;
+  }
+
+  .side{
+    width:83vw;
+  }
+
+  .sidehead{
+    height:150px;
+
+    padding:20px 25px;
+
+    gap:16px;
+  }
+
+  .sidehead img{
+    width:72px;
+    height:72px;
+  }
+
+  .sidehead strong{
+    font-size:38px;
+  }
+
+  .user>button{
+    font-size:20px;
+
+    padding:22px 24px;
+  }
+
+  .userlinks{
+    padding-left:53px;
+  }
+
+  .userlinks button{
+    font-size:20px;
+
+    padding:14px 0;
+  }
+
+  .group{
+    padding:20px 25px 12px;
+
+    font-size:19px;
+  }
+
+  .sideitem{
+    padding:21px 25px;
+
+    font-size:20px;
+  }
+
 }
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media(max-width:380px){
+
+  .top{
+    height:72px;
+  }
+
+  .menu,
+  .more,
+  .bell{
+    width:36px;
+    min-width:36px;
+  }
+
+  .logo{
+    width:34px;
+    height:34px;
+    flex-basis:34px;
+  }
+
+  .title{
+    font-size:21px;
+  }
+
+  .sub{
+    padding-left:15px;
+    padding-right:15px;
+
+    font-size:15px;
+  }
+
+  .news h3{
+    font-size:23px;
+  }
+
+  .news p{
+    font-size:18px;
+  }
+
+  .grid,
+  .cards{
+    gap:8px;
+  }
+
+  .tile{
+    min-height:145px;
+
+    padding:7px;
+  }
+
+  .tile .num{
+    font-size:37px;
+  }
+
+  .tile .ico{
+    font-size:31px;
+
+    margin-bottom:10px;
+  }
+
+  .tile small{
+    font-size:13px;
+  }
+
+  .timetable{
+    padding:14px 10px 24px;
+  }
+
+  .ttitle{
+    font-size:19px;
+  }
+
+  .day{
+    font-size:16px;
+  }
+
+  .day span{
+    font-size:14px;
+  }
+
+  .ex{
+    min-height:135px;
+
+    padding:6px;
+  }
+
+  .ex .ico{
+    font-size:29px;
+  }
+
+  .ex small{
+    font-size:13px;
+  }
+
+}
+
+
+/* =========================================================
+   LANDSCAPE PHONE
+========================================================= */
+
+@media(
+  max-height:500px
+) and (
+  orientation:landscape
+){
+
+  .top{
+    height:60px;
+  }
+
+  .subbar{
+    height:55px;
+  }
+
+  .bottom{
+    height:58px;
+    padding-bottom:0;
+  }
+
+  .sidehead{
+    height:110px;
+  }
+
+}
+
 </style>
 </head>
 
@@ -882,9 +1502,9 @@ button{
 <div class="app">
 
 
-<!-- ======================================================
+<!-- =====================================================
      HEADER
-====================================================== -->
+===================================================== -->
 
 <header class="top">
 
@@ -912,6 +1532,7 @@ Student
 <button
   class="more"
   onclick="toast('More')"
+  aria-label="More"
 >
 ⋮
 </button>
@@ -919,6 +1540,7 @@ Student
 <button
   class="bell"
   onclick="toast('Notifications')"
+  aria-label="Notifications"
 >
 ♧
 </button>
@@ -926,9 +1548,9 @@ Student
 </header>
 
 
-<!-- ======================================================
-     TOP APP NAVIGATION
-====================================================== -->
+<!-- =====================================================
+     TOP NAVIGATION
+===================================================== -->
 
 <nav class="subbar">
 
@@ -966,9 +1588,9 @@ Extra-curricular
 <main>
 
 
-<!-- ======================================================
+<!-- =====================================================
      STUDENT HOME
-====================================================== -->
+===================================================== -->
 
 <section
   id="student"
@@ -977,7 +1599,9 @@ Extra-curricular
 
 <div class="news">
 
-<span class="news-icon">▣</span>
+<span class="news-icon">
+▣
+</span>
 
 <h3>
 Latest news
@@ -995,6 +1619,7 @@ Whether you’re an experienced creative or looking for ways to meet like-minded
 
 
 <div class="grid">
+
 
 <button
   class="tile pink"
@@ -1059,21 +1684,39 @@ Timetable - click to view in full
 
 </div>
 
+
 <div class="days">
 
 <div class="day">
+
 Fri 11
-<span>No events.</span>
+
+<span>
+No events.
+</span>
+
 </div>
 
+
 <div class="day">
+
 Sat 12
-<span>No events.</span>
+
+<span>
+No events.
+</span>
+
 </div>
 
+
 <div class="day">
+
 Sun 13
-<span>No events.</span>
+
+<span>
+No events.
+</span>
+
 </div>
 
 </div>
@@ -1082,6 +1725,7 @@ Sun 13
 
 
 <div class="grid">
+
 
 <button
   class="tile"
@@ -1135,9 +1779,9 @@ Tickets &amp; events
 </section>
 
 
-<!-- ======================================================
+<!-- =====================================================
      MY COURSE
-====================================================== -->
+===================================================== -->
 
 <section
   id="course"
@@ -1170,9 +1814,9 @@ Course information
 </section>
 
 
-<!-- ======================================================
+<!-- =====================================================
      STUDENT SUPPORT
-====================================================== -->
+===================================================== -->
 
 <section
   id="support"
@@ -1187,62 +1831,110 @@ Student Support - light
 
 <div class="cards">
 
-<button class="ex" onclick="toast('Employability')">
+
+<button
+  class="ex"
+  onclick="toast('Employability')"
+>
 <span class="ico">〽</span>
 <small>Employability</small>
 </button>
 
-<button class="ex" onclick="toast('Money')">
+
+<button
+  class="ex"
+  onclick="toast('Money')"
+>
 <span class="ico">▱</span>
 <small>Money</small>
 </button>
 
-<button class="ex" onclick="toast('Student card top up')">
+
+<button
+  class="ex"
+  onclick="toast('Student card top up')"
+>
 <span class="ico">▤</span>
 <small>Student card top up</small>
 </button>
 
-<button class="ex" onclick="toast('Wellbeing toolkit')">
+
+<button
+  class="ex"
+  onclick="toast('Wellbeing toolkit')"
+>
 <span class="ico">♡</span>
 <small>Wellbeing toolkit</small>
 </button>
 
-<button class="ex" onclick="toast('Get wellbeing help')">
+
+<button
+  class="ex"
+  onclick="toast('Get wellbeing help')"
+>
 <span class="ico">♡</span>
 <small>Get wellbeing help</small>
 </button>
 
-<button class="ex" onclick="toast('Disability inclusion')">
+
+<button
+  class="ex"
+  onclick="toast('Disability inclusion')"
+>
 <span class="ico">✣</span>
 <small>Disability inclusion</small>
 </button>
 
-<button class="ex" onclick="toast('Exam support')">
+
+<button
+  class="ex"
+  onclick="toast('Exam support')"
+>
 <span class="ico">☷</span>
 <small>Exam support</small>
 </button>
 
-<button class="ex" onclick="toast('StudentHub')">
+
+<button
+  class="ex"
+  onclick="toast('StudentHub')"
+>
 <span class="ico">▱</span>
 <small>StudentHub</small>
 </button>
 
-<button class="ex" onclick="toast('MyStudentRecord')">
+
+<button
+  class="ex"
+  onclick="toast('MyStudentRecord')"
+>
 <span class="ico">▧</span>
 <small>MyStudentRecord</small>
 </button>
 
-<button class="ex" onclick="toast('Report + Support')">
+
+<button
+  class="ex"
+  onclick="toast('Report + Support')"
+>
 <span class="ico">◁</span>
 <small>Report + Support</small>
 </button>
 
-<button class="ex" onclick="toast('Safety on campus')">
+
+<button
+  class="ex"
+  onclick="toast('Safety on campus')"
+>
 <span class="ico">♢</span>
 <small>Safety on campus</small>
 </button>
 
-<button class="ex" onclick="toast('Visa / Immigration')">
+
+<button
+  class="ex"
+  onclick="toast('Visa / Immigration')"
+>
 <span class="ico">▤</span>
 <small>Visa / Immigration</small>
 </button>
@@ -1254,9 +1946,9 @@ Student Support - light
 </section>
 
 
-<!-- ======================================================
+<!-- =====================================================
      EXTRA CURRICULAR
-====================================================== -->
+===================================================== -->
 
 <section
   id="extra"
@@ -1271,72 +1963,128 @@ Extracurricular - light
 
 <div class="cards">
 
-<button class="ex" onclick="toast('Latest news')">
+
+<button
+  class="ex"
+  onclick="toast('Latest news')"
+>
 <span class="ico">▤</span>
 <small>Latest news</small>
 </button>
 
-<button class="ex" onclick="toast('NTU student life')">
+
+<button
+  class="ex"
+  onclick="toast('NTU student life')"
+>
 <span class="ico">◔</span>
 <small>NTU student life</small>
 </button>
 
-<button class="ex" onclick="toast('Job opportunities')">
+
+<button
+  class="ex"
+  onclick="toast('Job opportunities')"
+>
 <span class="ico">♧</span>
 <small>Job opportunities</small>
 </button>
 
-<button class="ex" onclick="toast('NTU Sport')">
+
+<button
+  class="ex"
+  onclick="toast('NTU Sport')"
+>
 <span class="ico">NTU</span>
 <small>NTU Sport</small>
 </button>
 
-<button class="ex" onclick="toast('LIVE LEARN WORK')">
+
+<button
+  class="ex"
+  onclick="toast('LIVE LEARN WORK')"
+>
 <span class="ico">◈</span>
 <small>LIVE<br>LEARN<br>WORK</small>
 </button>
 
-<button class="ex" onclick="toast('Student benefits')">
+
+<button
+  class="ex"
+  onclick="toast('Student benefits')"
+>
 <span class="ico">☆</span>
 <small>Student benefits</small>
 </button>
 
-<button class="ex" onclick="toast('Student Union')">
+
+<button
+  class="ex"
+  onclick="toast('Student Union')"
+>
 <span class="ico">NISU</span>
 <small>Student Union</small>
 </button>
 
-<button class="ex" onclick="toast('Study abroad')">
+
+<button
+  class="ex"
+  onclick="toast('Study abroad')"
+>
 <span class="ico">▣</span>
 <small>Study abroad</small>
 </button>
 
-<button class="ex" onclick="toast('Travel')">
+
+<button
+  class="ex"
+  onclick="toast('Travel')"
+>
 <span class="ico">✈</span>
 <small>Travel</small>
 </button>
 
-<button class="ex" onclick="toast('Global lounges')">
+
+<button
+  class="ex"
+  onclick="toast('Global lounges')"
+>
 <span class="ico">◎</span>
 <small>Global lounges</small>
 </button>
 
-<button class="ex" onclick="toast('NTU Moves')">
+
+<button
+  class="ex"
+  onclick="toast('NTU Moves')"
+>
 <span class="ico">♙</span>
 <small>NTU Moves</small>
 </button>
 
-<button class="ex" onclick="toast('NTU Arts')">
+
+<button
+  class="ex"
+  onclick="toast('NTU Arts')"
+>
 <span class="ico">NTU</span>
 <small>NTU Arts</small>
 </button>
 
-<button class="ex" onclick="toast('Volunteering')">
+
+<button
+  class="ex"
+  onclick="toast('Volunteering')"
+>
 <span class="ico">⌂</span>
 <small>Volunteering</small>
 </button>
 
-<button class="ex" onclick="toast('NTU Food')">
+
+<button
+  class="ex"
+  onclick="toast('NTU Food')"
+>
 <span class="ico">♜</span>
 <small>NTU Food</small>
 </button>
@@ -1348,9 +2096,9 @@ Extracurricular - light
 </section>
 
 
-<!-- ======================================================
+<!-- =====================================================
      CALENDAR
-====================================================== -->
+===================================================== -->
 
 <section
   id="calendar"
@@ -1460,9 +2208,9 @@ Today&nbsp; ›
 </section>
 
 
-<!-- ======================================================
+<!-- =====================================================
      PROFILE
-====================================================== -->
+===================================================== -->
 
 <section
   id="profile"
@@ -1481,6 +2229,7 @@ Today&nbsp; ›
 ◉
 </div>
 
+
 <div>
 
 <div
@@ -1489,6 +2238,7 @@ Today&nbsp; ›
 >
 Emmanuel Morton
 </div>
+
 
 <div
   class="profile-user-id"
@@ -1573,7 +2323,6 @@ Academic year
 Save profile
 </button>
 
-
 </div>
 
 
@@ -1616,9 +2365,9 @@ UserRead
 </main>
 
 
-<!-- ======================================================
+<!-- =====================================================
      BOTTOM NAVIGATION
-====================================================== -->
+===================================================== -->
 
 <nav class="bottom">
 
@@ -1682,9 +2431,9 @@ StudentHub
 </div>
 
 
-<!-- ======================================================
+<!-- =====================================================
      SIDE DRAWER
-====================================================== -->
+===================================================== -->
 
 <div
   class="drawer"
@@ -1693,8 +2442,6 @@ StudentHub
 
 <aside class="side">
 
-
-<!-- MYNTU HEADER -->
 
 <div class="sidehead">
 
@@ -1710,26 +2457,31 @@ MyNTU
 </div>
 
 
-<!-- USER PROFILE -->
-
 <div
   class="user"
   id="user"
 >
 
 <button
-  onclick="toggleUser()"
+  onclick="
+    document
+      .getElementById('user')
+      .classList
+      .toggle('open')
+  "
 >
 
-<span class="user-person-icon">
-●
+<span>
+◉
 </span>
+
+&nbsp;
 
 <span id="menuStudentName">
 Emmanuel Morton 2025 (N1388236)
 </span>
 
-<span class="user-chevron">
+<span>
 ⌄
 </span>
 
@@ -1738,60 +2490,51 @@ Emmanuel Morton 2025 (N1388236)
 
 <div class="userlinks">
 
-<button
-  data-screen="profile"
->
+
+<button data-screen="profile">
 Profile
 </button>
 
-<button
-  onclick="toast('Preferences')"
->
+
+<button onclick="toast('Preferences')">
 Preferences
 </button>
 
-<button
-  onclick="toast('Reload app')"
->
+
+<button onclick="toast('Reload app')">
 Reload app
 </button>
 
-<button
-  onclick="toast('Services')"
->
+
+<button onclick="toast('Services')">
 Services
 </button>
 
-<button
-  onclick="toast('Active sessions')"
->
+
+<button onclick="toast('Active sessions')">
 Active sessions
 </button>
 
-<button
-  onclick="toast('Privacy policy')"
->
+
+<button onclick="toast('Privacy policy')">
 Privacy policy
 </button>
 
-<button
-  onclick="toast('About')"
->
+
+<button onclick="toast('About')">
 About
 </button>
 
-<button
-  onclick="toast('Signed out')"
->
+
+<button onclick="toast('Signed out')">
 Sign out
 </button>
 
-</div>
 
 </div>
 
+</div>
 
-<!-- DASHBOARDS -->
 
 <div class="group">
 DASHBOARDS
@@ -1802,19 +2545,9 @@ DASHBOARDS
   class="sideitem active"
   data-screen="student"
 >
-
-<span class="drawer-icon home-icon">
-⌂
-</span>
-
-<span>
-Student
-</span>
-
+⌂ &nbsp; Student
 </button>
 
-
-<!-- APPS -->
 
 <div class="group">
 APPS
@@ -1825,15 +2558,15 @@ APPS
   class="sideitem"
   data-screen="student"
 >
+▣ &nbsp; Latest news
+</button>
 
-<span class="drawer-icon news-icon-drawer">
-▣
-</span>
 
-<span>
-Latest news
-</span>
-
+<button
+  class="sideitem"
+  data-screen="student"
+>
+♧ &nbsp; StudentLight-AppTileAssessmentResults
 </button>
 
 
@@ -1842,31 +2575,16 @@ Latest news
   data-screen="student"
 >
 
-<span class="drawer-icon clover-icon">
-♧
-</span>
+♧ &nbsp; StudentLight-AppTileEmail
 
-<span>
-StudentLight-AppTileAssessmentResults
-</span>
-
-</button>
-
-
-<button
-  class="sideitem"
-  data-screen="student"
+<span
+  style="
+    float:right;
+    background:#27b9df;
+    border-radius:12px;
+    padding:2px 7px
+  "
 >
-
-<span class="drawer-icon clover-icon">
-♧
-</span>
-
-<span>
-StudentLight-AppTileEmail
-</span>
-
-<span class="email-badge">
 5
 </span>
 
@@ -1878,7 +2596,9 @@ StudentLight-AppTileEmail
 </div>
 
 
-<!-- TOAST -->
+<!-- =====================================================
+     TOAST
+===================================================== -->
 
 <div id="toast"></div>
 
@@ -1889,17 +2609,29 @@ StudentLight-AppTileEmail
    PAGE NAVIGATION
 ========================================================= */
 
-const pages = document.querySelectorAll('.screen');
-const controls = document.querySelectorAll('[data-screen]');
-const drawer = document.getElementById('drawer');
+const pages =
+  document.querySelectorAll('.screen');
+
+const controls =
+  document.querySelectorAll('[data-screen]');
+
+const drawer =
+  document.getElementById('drawer');
 
 const titles = {
+
   student:'Student',
+
   course:'My Course',
+
   support:'Student support - light',
+
   extra:'Extracurricular - light',
+
   calendar:'Calendar',
+
   profile:'StudentHub'
+
 };
 
 
@@ -1910,36 +2642,59 @@ const titles = {
 function loadProfile(){
 
   const savedGiven =
-    localStorage.getItem('myntu_given_name');
+    localStorage.getItem(
+      'myntu_given_name'
+    );
 
   const savedFamily =
-    localStorage.getItem('myntu_family_name');
+    localStorage.getItem(
+      'myntu_family_name'
+    );
 
   const savedId =
-    localStorage.getItem('myntu_student_id');
+    localStorage.getItem(
+      'myntu_student_id'
+    );
 
   const savedYear =
-    localStorage.getItem('myntu_academic_year');
+    localStorage.getItem(
+      'myntu_academic_year'
+    );
 
 
   if(savedGiven){
-    document.getElementById('givenName').value =
-      savedGiven;
+
+    document
+      .getElementById('givenName')
+      .value = savedGiven;
+
   }
+
 
   if(savedFamily){
-    document.getElementById('familyName').value =
-      savedFamily;
+
+    document
+      .getElementById('familyName')
+      .value = savedFamily;
+
   }
+
 
   if(savedId){
-    document.getElementById('studentId').value =
-      savedId;
+
+    document
+      .getElementById('studentId')
+      .value = savedId;
+
   }
 
+
   if(savedYear){
-    document.getElementById('academicYear').value =
-      savedYear;
+
+    document
+      .getElementById('academicYear')
+      .value = savedYear;
+
   }
 
 
@@ -1949,25 +2704,36 @@ function loadProfile(){
 
 
 /* =========================================================
-   UPDATE NAME + ID EVERYWHERE
+   UPDATE NAME + ID
 ========================================================= */
 
 function updateStudentDetails(){
 
   const given =
-    document.getElementById('givenName')?.value ||
+    document
+      .getElementById('givenName')
+      ?.value ||
     'Emmanuel';
 
+
   const family =
-    document.getElementById('familyName')?.value ||
+    document
+      .getElementById('familyName')
+      ?.value ||
     'Morton';
 
+
   const id =
-    document.getElementById('studentId')?.value ||
+    document
+      .getElementById('studentId')
+      ?.value ||
     'N1388236';
 
+
   const year =
-    document.getElementById('academicYear')?.value ||
+    document
+      .getElementById('academicYear')
+      ?.value ||
     '2025';
 
 
@@ -1976,28 +2742,49 @@ function updateStudentDetails(){
 
 
   const profileName =
-    document.getElementById('profileDisplayName');
+    document.getElementById(
+      'profileDisplayName'
+    );
+
 
   const profileId =
-    document.getElementById('profileDisplayId');
+    document.getElementById(
+      'profileDisplayId'
+    );
+
 
   const menuName =
-    document.getElementById('menuStudentName');
+    document.getElementById(
+      'menuStudentName'
+    );
 
 
   if(profileName){
+
     profileName.textContent =
       fullName;
+
   }
+
 
   if(profileId){
+
     profileId.textContent =
       year + ' (' + id + ')';
+
   }
 
+
   if(menuName){
+
     menuName.textContent =
-      fullName + ' ' + year + ' (' + id + ')';
+      fullName +
+      ' ' +
+      year +
+      ' (' +
+      id +
+      ')';
+
   }
 
 }
@@ -2010,27 +2797,46 @@ function updateStudentDetails(){
 function saveProfile(){
 
   const given =
-    document.getElementById('givenName')
-      .value.trim();
+    document
+      .getElementById('givenName')
+      .value
+      .trim();
+
 
   const family =
-    document.getElementById('familyName')
-      .value.trim();
+    document
+      .getElementById('familyName')
+      .value
+      .trim();
+
 
   const id =
-    document.getElementById('studentId')
-      .value.trim();
+    document
+      .getElementById('studentId')
+      .value
+      .trim();
+
 
   const year =
-    document.getElementById('academicYear')
-      .value.trim();
+    document
+      .getElementById('academicYear')
+      .value
+      .trim();
 
 
-  if(!given || !family || !id || !year){
+  if(
+    !given ||
+    !family ||
+    !id ||
+    !year
+  ){
 
-    toast('Please complete all profile fields');
+    toast(
+      'Please complete all profile fields'
+    );
 
     return;
+
   }
 
 
@@ -2039,15 +2845,18 @@ function saveProfile(){
     given
   );
 
+
   localStorage.setItem(
     'myntu_family_name',
     family
   );
 
+
   localStorage.setItem(
     'myntu_student_id',
     id
   );
+
 
   localStorage.setItem(
     'myntu_academic_year',
@@ -2056,6 +2865,7 @@ function saveProfile(){
 
 
   updateStudentDetails();
+
 
   toast('Profile saved');
 
@@ -2068,56 +2878,64 @@ function saveProfile(){
 
 function show(name){
 
-  pages.forEach(p => {
+  pages.forEach(page => {
 
-    p.classList.toggle(
+    page.classList.toggle(
       'active',
-      p.id === name
+      page.id === name
     );
 
   });
 
 
-  controls.forEach(c => {
+  controls.forEach(control => {
 
-    c.classList.toggle(
+    control.classList.toggle(
       'active',
-      c.dataset.screen === name
+      control.dataset.screen === name
     );
 
   });
 
 
-  document.getElementById('pageTitle').textContent =
-    titles[name] || 'Student';
+  document
+    .getElementById('pageTitle')
+    .textContent =
+      titles[name] || 'Student';
 
 
   drawer.classList.remove('open');
 
 
-  window.scrollTo({
-    top:0,
-    behavior:'smooth'
-  });
-
-
   if(name === 'profile'){
+
     loadProfile();
+
   }
+
+
+  window.scrollTo(
+    0,
+    0
+  );
 
 }
 
 
 /* =========================================================
-   NAV BUTTONS
+   NAVIGATION CONTROLS
 ========================================================= */
 
-controls.forEach(c => {
+controls.forEach(control => {
 
-  c.addEventListener(
+  control.addEventListener(
     'click',
     () => {
-      show(c.dataset.screen);
+
+      show(
+        control.dataset.screen
+      );
+
     }
   );
 
@@ -2125,38 +2943,29 @@ controls.forEach(c => {
 
 
 /* =========================================================
-   OPEN SIDE MENU
+   OPEN DRAWER
 ========================================================= */
 
-document.getElementById('menu').onclick = () => {
+document
+  .getElementById('menu')
+  .onclick = () => {
 
-  drawer.classList.add('open');
+    drawer.classList.add('open');
 
-};
+  };
 
 
 /* =========================================================
-   PROFILE DROPDOWN
+   CLOSE DRAWER
 ========================================================= */
 
-function toggleUser(){
+drawer.onclick = event => {
 
-  document
-    .getElementById('user')
-    .classList.toggle('open');
+  if(event.target === drawer){
 
-}
-
-
-/* =========================================================
-   CLOSE SIDE MENU
-========================================================= */
-
-drawer.onclick = e => {
-
-  if(e.target === drawer){
-
-    drawer.classList.remove('open');
+    drawer.classList.remove(
+      'open'
+    );
 
   }
 
@@ -2170,10 +2979,14 @@ drawer.onclick = e => {
 function toast(message){
 
   const t =
-    document.getElementById('toast');
+    document.getElementById(
+      'toast'
+    );
+
 
   t.textContent =
     message;
+
 
   t.style.display =
     'block';
@@ -2187,7 +3000,10 @@ function toast(message){
   window.toastTimer =
     setTimeout(
       () => {
-        t.style.display = 'none';
+
+        t.style.display =
+          'none';
+
       },
       1600
     );
@@ -2196,7 +3012,7 @@ function toast(message){
 
 
 /* =========================================================
-   LOAD PROFILE
+   INITIAL LOAD
 ========================================================= */
 
 loadProfile();
