@@ -1,33 +1,15 @@
 <!doctype html>
 <html lang="en">
 <head>
-
 <meta charset="utf-8">
 
-<meta
-  name="viewport"
-  content="width=device-width,
-  initial-scale=1,
-  maximum-scale=1,
-  viewport-fit=cover"
->
+<meta name="viewport"
+content="width=device-width,initial-scale=1,viewport-fit=cover">
 
 <meta name="theme-color" content="#303030">
-
-<meta
-  name="apple-mobile-web-app-capable"
-  content="yes"
->
-
-<meta
-  name="apple-mobile-web-app-status-bar-style"
-  content="black-translucent"
->
-
-<meta
-  name="apple-mobile-web-app-title"
-  content="MyNTU"
->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MyNTU">
 
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="myntu-logo.png">
@@ -38,7 +20,7 @@
 <style>
 
 /* =========================================================
-   GLOBAL
+   BASIC RESET
 ========================================================= */
 
 *{
@@ -46,36 +28,30 @@
   -webkit-tap-highlight-color:transparent;
 }
 
-html{
+html,
+body{
   width:100%;
   min-height:100%;
   margin:0;
   padding:0;
   overflow-x:hidden;
+}
+
+html{
   background:#111;
 }
 
 body{
-  width:100%;
-  min-width:0;
-  min-height:100vh;
-  margin:0;
-  padding:0;
-  overflow-x:hidden;
   background:#111;
   color:#fff;
-
   font-family:
     -apple-system,
     BlinkMacSystemFont,
     "Helvetica Neue",
     Arial,
     sans-serif;
-
   font-size:15px;
-
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
+  overflow-y:auto;
 }
 
 button,
@@ -88,14 +64,17 @@ button{
   touch-action:manipulation;
 }
 
-img{
-  max-width:100%;
-}
+
+/* =========================================================
+   MAIN APP
+========================================================= */
 
 .app{
+  position:relative;
   width:100%;
   max-width:none;
   min-height:100vh;
+  height:auto;
   margin:0;
   padding:0 0 calc(70px + env(safe-area-inset-bottom));
   background:#111;
@@ -109,7 +88,7 @@ img{
 
 .top{
   width:100%;
-  height:82px;
+  height:76px;
 
   background:#303030;
 
@@ -118,30 +97,25 @@ img{
 
   padding:
     8px
-    max(8px, env(safe-area-inset-right))
+    max(8px,env(safe-area-inset-right))
     8px
-    max(8px, env(safe-area-inset-left));
+    max(8px,env(safe-area-inset-left));
 
   gap:6px;
 
   border-bottom:1px solid #444;
 
-  position:sticky;
-  top:0;
-
+  position:relative;
   z-index:20;
-
-  overflow:hidden;
 }
 
 .menu,
 .more,
 .bell{
-  width:44px;
-  min-width:44px;
-  height:44px;
+  width:46px;
+  height:48px;
 
-  padding:0;
+  flex:0 0 46px;
 
   border:0;
   background:transparent;
@@ -151,12 +125,11 @@ img{
   align-items:center;
   justify-content:center;
 
-  flex-shrink:0;
+  padding:0;
 }
 
 .menu{
-  font-size:27px;
-  line-height:1;
+  font-size:28px;
 }
 
 .more{
@@ -168,12 +141,12 @@ img{
 }
 
 .logo{
-  width:40px;
-  height:40px;
-
-  flex:0 0 40px;
+  width:42px;
+  height:42px;
 
   object-fit:contain;
+
+  flex:0 0 42px;
 }
 
 .title{
@@ -181,8 +154,6 @@ img{
   flex:1;
 
   font-size:27px;
-  line-height:1.1;
-
   font-weight:700;
 
   color:#fff;
@@ -199,18 +170,14 @@ img{
 
 .subbar{
   width:100%;
-  height:76px;
+  height:48px;
 
-  background:#111;
+  background:#292929;
 
   display:flex;
   align-items:center;
 
-  padding:
-    8px
-    max(8px, env(safe-area-inset-right))
-    8px
-    max(8px, env(safe-area-inset-left));
+  padding:4px 8px;
 
   gap:8px;
 
@@ -225,6 +192,8 @@ img{
 }
 
 .sub{
+  height:40px;
+
   flex:0 0 auto;
 
   border:0;
@@ -232,18 +201,14 @@ img{
   color:#fff;
   background:#555;
 
-  border-radius:8px 8px 0 0;
+  border-radius:7px 7px 0 0;
 
-  padding:13px 20px;
+  padding:0 18px;
 
-  font-size:17px;
-  line-height:1;
-
+  font-size:16px;
   font-weight:700;
 
   white-space:nowrap;
-
-  min-height:60px;
 }
 
 .sub.active{
@@ -257,8 +222,12 @@ img{
 
 .screen{
   display:none;
+
   width:100%;
   min-width:0;
+
+  height:auto;
+  min-height:0;
 }
 
 .screen.active{
@@ -268,7 +237,11 @@ img{
 .content{
   width:100%;
   min-width:0;
-  padding:0 8px;
+
+  height:auto;
+  min-height:0;
+
+  padding:5px 8px;
 }
 
 
@@ -282,17 +255,15 @@ img{
   background:#fff;
   color:#222;
 
-  padding:14px 16px 18px;
+  padding:14px 15px 18px;
 
   min-height:0;
 
   border:1px solid #aaa;
-
-  overflow:hidden;
 }
 
 .news h3{
-  margin:0 0 10px;
+  margin:0 0 8px;
 
   font-size:28px;
   line-height:1.15;
@@ -301,10 +272,10 @@ img{
 }
 
 .news p{
-  margin:8px 0;
+  margin:7px 0;
 
-  font-size:23px;
-  line-height:1.32;
+  font-size:20px;
+  line-height:1.3;
 
   font-weight:500;
 }
@@ -313,15 +284,11 @@ img{
   float:right;
 
   font-size:25px;
-
-  line-height:1;
-
-  margin-left:8px;
 }
 
 
 /* =========================================================
-   TILES
+   APP TILES
 ========================================================= */
 
 .grid{
@@ -332,19 +299,19 @@ img{
   grid-template-columns:
     repeat(3,minmax(0,1fr));
 
-  gap:16px;
+  gap:10px;
 
-  padding:16px 8px;
+  padding:10px 8px;
 }
 
 .tile{
   width:100%;
   min-width:0;
 
-  min-height:205px;
+  min-height:125px;
 
   border:0;
-  border-radius:15px;
+  border-radius:14px;
 
   background:#fff;
   color:#222;
@@ -357,7 +324,7 @@ img{
 
   text-align:center;
 
-  padding:12px;
+  padding:8px;
 
   font-weight:700;
 
@@ -367,31 +334,29 @@ img{
 }
 
 .tile .ico{
-  font-size:42px;
+  font-size:38px;
 
   color:#bd004d;
 
   line-height:1;
 
-  margin-bottom:18px;
+  margin-bottom:10px;
 }
 
 .tile .num{
-  font-size:48px;
+  font-size:50px;
 
   color:#bd004d;
 
   line-height:1;
-
-  font-weight:800;
 }
 
 .tile small{
-  font-size:19px;
+  font-size:17px;
 
-  line-height:1.25;
+  line-height:1.15;
 
-  margin-top:13px;
+  margin-top:8px;
 }
 
 .tile.pink{
@@ -411,26 +376,19 @@ img{
 .timetable{
   width:100%;
 
-  background:#bd004d;
+  background:#c9004f;
 
-  padding:
-    18px
-    14px
-    30px;
+  padding:15px 14px 28px;
 
   color:#fff;
-
-  overflow:hidden;
 }
 
 .ttitle{
-  font-size:27px;
+  font-size:25px;
 
-  line-height:1.2;
+  font-weight:700;
 
-  margin-bottom:22px;
-
-  font-weight:600;
+  margin-bottom:20px;
 }
 
 .days{
@@ -439,27 +397,23 @@ img{
   grid-template-columns:
     repeat(3,minmax(0,1fr));
 
-  gap:14px;
+  gap:8px;
 }
 
 .day{
   min-width:0;
 
-  font-size:23px;
+  font-size:20px;
 
-  line-height:1.2;
-
-  font-weight:600;
+  font-weight:700;
 }
 
 .day span{
   display:block;
 
-  margin-top:12px;
+  margin-top:10px;
 
-  font-size:20px;
-
-  line-height:1.25;
+  font-size:19px;
 }
 
 
@@ -469,13 +423,14 @@ img{
 
 .section{
   width:100%;
-  padding:8px 0;
+
+  padding:6px 5px;
 }
 
 .section h2{
-  font-size:24px;
+  font-size:22px;
 
-  margin:8px 0 14px;
+  margin:6px 0 10px;
 }
 
 .cards{
@@ -486,7 +441,7 @@ img{
   grid-template-columns:
     repeat(3,minmax(0,1fr));
 
-  gap:16px;
+  gap:10px;
 }
 
 .ex{
@@ -496,9 +451,9 @@ img{
   background:#fff;
   color:#222;
 
-  border-radius:15px;
+  border-radius:14px;
 
-  min-height:180px;
+  min-height:120px;
 
   border:0;
 
@@ -510,25 +465,21 @@ img{
 
   text-align:center;
 
-  padding:12px;
+  padding:8px;
 
   font-weight:700;
-
-  overflow:hidden;
 }
 
 .ex .ico{
-  font-size:38px;
+  font-size:34px;
 
   color:#bd004d;
 
-  margin-bottom:14px;
+  margin-bottom:8px;
 }
 
 .ex small{
-  font-size:17px;
-
-  line-height:1.25;
+  font-size:15px;
 }
 
 
@@ -542,7 +493,8 @@ img{
   background:#fff;
   color:#222;
 
-  min-height:735px;
+  min-height:0;
+  height:auto;
 
   overflow:hidden;
 }
@@ -631,13 +583,11 @@ img{
 .timegrid{
   display:grid;
 
-  grid-template-columns:62px minmax(0,1fr);
+  grid-template-columns:62px 1fr;
 
   height:510px;
 
   border-top:1px solid #ddd;
-
-  overflow:hidden;
 }
 
 .times{
@@ -657,14 +607,10 @@ img{
 }
 
 .columns{
-  min-width:0;
-
   display:grid;
 
   grid-template-columns:
     repeat(7,minmax(0,1fr));
-
-  position:relative;
 }
 
 .columns div{
@@ -672,10 +618,7 @@ img{
 }
 
 .nowline{
-  position:absolute;
-
-  left:0;
-  right:0;
+  position:relative;
 
   top:475px;
 
@@ -688,7 +631,6 @@ img{
   position:absolute;
 
   right:30%;
-
   top:-5px;
 
   width:10px;
@@ -711,7 +653,8 @@ img{
 
   color:#222;
 
-  min-height:735px;
+  min-height:0;
+  height:auto;
 
   padding:0 8px 20px;
 }
@@ -719,8 +662,6 @@ img{
 .profile-card,
 .roles-card,
 .language-card{
-  width:100%;
-
   background:#fff;
 
   border-radius:6px;
@@ -728,9 +669,14 @@ img{
   margin:8px 0;
 
   box-shadow:0 1px 4px #0002;
+}
 
+.profile-card{
   overflow:hidden;
 }
+
+
+/* PROFILE HEADER */
 
 .profile-user{
   display:flex;
@@ -778,6 +724,9 @@ img{
   color:#ccc;
 }
 
+
+/* PROFILE EDITING */
+
 .profile-row{
   display:block;
 
@@ -808,12 +757,6 @@ img{
   color:#222;
 
   font-size:15px;
-
-  outline:none;
-}
-
-.profile-row input:focus{
-  border-color:#bd004d;
 }
 
 .save-profile{
@@ -835,6 +778,9 @@ img{
 
   font-weight:700;
 }
+
+
+/* ROLES */
 
 .roles-head,
 .language-head{
@@ -866,16 +812,13 @@ img{
   position:fixed;
 
   left:0;
-  right:0;
   bottom:0;
 
   width:100%;
 
-  height:
-    calc(68px + env(safe-area-inset-bottom));
+  height:70px;
 
-  padding-bottom:
-    env(safe-area-inset-bottom);
+  padding-bottom:env(safe-area-inset-bottom);
 
   background:#303030;
 
@@ -890,37 +833,21 @@ img{
 }
 
 .nav{
-  min-width:0;
-
   border:0;
 
   background:none;
 
   color:#fff;
 
-  font-size:14px;
+  font-size:13px;
 
-  font-weight:500;
-
-  padding:4px 2px;
-
-  display:flex;
-
-  flex-direction:column;
-
-  align-items:center;
-
-  justify-content:center;
-
-  gap:2px;
-
-  overflow:hidden;
+  min-width:0;
 }
 
 .nav .nicon{
   display:block;
 
-  font-size:26px;
+  font-size:25px;
 
   line-height:27px;
 }
@@ -939,16 +866,13 @@ img{
 
   inset:0;
 
-  width:100%;
-  height:100%;
-
   background:#0008;
 
   z-index:50;
 
   display:none;
 
-  overflow:hidden;
+  touch-action:none;
 }
 
 .drawer.open{
@@ -956,30 +880,22 @@ img{
 }
 
 .side{
-  width:83vw;
-  max-width:none;
+  width:min(390px,86vw);
 
   height:100%;
 
-  background:#292929;
+  background:#333;
 
   box-shadow:6px 0 20px #0008;
 
-  overflow-x:hidden;
   overflow-y:auto;
+  overflow-x:hidden;
 
   -webkit-overflow-scrolling:touch;
 }
 
-
-/* =========================================================
-   DRAWER HEADER
-========================================================= */
-
 .sidehead{
-  width:100%;
-
-  height:184px;
+  height:82px;
 
   background:#303030;
 
@@ -987,42 +903,28 @@ img{
 
   align-items:center;
 
-  padding:25px 32px;
+  padding:10px 14px;
 
-  gap:22px;
-
-  flex-shrink:0;
+  gap:12px;
 }
 
 .sidehead img{
-  width:94px;
-  height:94px;
+  width:62px;
+  height:62px;
 
   object-fit:contain;
-
-  flex-shrink:0;
 }
 
 .sidehead strong{
-  font-size:52px;
+  font-size:30px;
 
-  font-weight:700;
-
-  color:#000;
-
-  letter-spacing:-1px;
-
-  white-space:nowrap;
+  color:#fff;
 }
 
 
-/* =========================================================
-   USER AREA
-========================================================= */
+/* USER AREA */
 
 .user{
-  width:100%;
-
   background:#242424;
 
   border-bottom:1px solid #444;
@@ -1033,47 +935,21 @@ img{
 
   border:0;
 
-  background:#242424;
+  background:none;
 
   color:#fff;
 
   text-align:left;
 
-  font-size:26px;
+  font-size:17px;
 
-  font-weight:500;
-
-  padding:27px 32px;
-
-  min-height:76px;
-
-  white-space:nowrap;
-
-  overflow:hidden;
-
-  text-overflow:ellipsis;
-}
-
-.user>button span:first-child{
-  font-size:28px;
-}
-
-.user>button span:last-child{
-  float:right;
-
-  font-size:24px;
+  padding:18px 14px;
 }
 
 .userlinks{
   display:none;
 
-  padding:
-    10px
-    0
-    18px
-    63px;
-
-  background:#292929;
+  padding:5px 28px 15px 54px;
 }
 
 .userlinks button{
@@ -1081,7 +957,9 @@ img{
 
   width:100%;
 
-  padding:17px 0;
+  text-align:left;
+
+  padding:14px 0;
 
   border:0;
 
@@ -1089,11 +967,7 @@ img{
 
   color:#ddd;
 
-  text-align:left;
-
-  font-size:25px;
-
-  line-height:1.2;
+  font-size:17px;
 }
 
 .user.open .userlinks{
@@ -1101,30 +975,17 @@ img{
 }
 
 
-/* =========================================================
-   DRAWER GROUP HEADINGS
-========================================================= */
+/* SIDE MENU GROUPS */
 
 .group{
-  width:100%;
-
-  padding:25px 32px 14px;
+  padding:15px 28px 7px;
 
   color:#aaa;
 
-  background:#333;
-
-  font-size:22px;
+  font-size:16px;
 
   font-weight:500;
-
-  letter-spacing:.2px;
 }
-
-
-/* =========================================================
-   DRAWER ITEMS
-========================================================= */
 
 .sideitem{
   width:100%;
@@ -1137,19 +998,11 @@ img{
 
   text-align:left;
 
-  padding:24px 32px;
+  padding:16px 28px;
 
-  font-size:25px;
+  font-size:17px;
 
-  line-height:1.2;
-
-  min-height:72px;
-
-  overflow:hidden;
-
-  text-overflow:ellipsis;
-
-  white-space:nowrap;
+  min-height:55px;
 }
 
 .sideitem.active{
@@ -1165,12 +1018,9 @@ img{
   position:fixed;
 
   left:50%;
-  bottom:
-    calc(78px + env(safe-area-inset-bottom));
+  bottom:85px;
 
   transform:translateX(-50%);
-
-  max-width:90vw;
 
   background:#fff;
 
@@ -1191,101 +1041,29 @@ img{
 
 
 /* =========================================================
-   PHONE OPTIMISATION
+   PHONE SIZING
 ========================================================= */
 
 @media(max-width:600px){
 
-  .top{
-    height:76px;
-
-    padding-left:
-      max(6px,env(safe-area-inset-left));
-
-    padding-right:
-      max(6px,env(safe-area-inset-right));
-  }
-
-  .menu,
-  .more,
-  .bell{
-    width:40px;
-    min-width:40px;
-    height:40px;
-  }
-
-  .menu{
-    font-size:25px;
-  }
-
-  .logo{
-    width:36px;
-    height:36px;
-    flex-basis:36px;
-  }
-
   .title{
-    font-size:24px;
-  }
-
-  .subbar{
-    height:70px;
-
-    padding:6px;
-  }
-
-  .sub{
-    padding:12px 18px;
-
-    min-height:58px;
-
-    font-size:16px;
-  }
-
-  .content{
-    padding:0 8px;
-  }
-
-  .news{
-    padding:14px 16px 18px;
-  }
-
-  .news h3{
     font-size:26px;
   }
 
-  .news p{
-    font-size:21px;
+  .news h3{
+    font-size:25px;
   }
 
-  .grid,
-  .cards{
-    gap:12px;
-
-    padding-left:8px;
-    padding-right:8px;
+  .news p{
+    font-size:19px;
   }
 
   .tile{
-    min-height:180px;
-
-    border-radius:14px;
-  }
-
-  .tile .num{
-    font-size:44px;
-  }
-
-  .tile .ico{
-    font-size:37px;
+    min-height:125px;
   }
 
   .tile small{
     font-size:16px;
-  }
-
-  .timetable{
-    padding:16px 14px 27px;
   }
 
   .ttitle{
@@ -1293,204 +1071,59 @@ img{
   }
 
   .day{
-    font-size:19px;
+    font-size:18px;
   }
 
   .day span{
     font-size:17px;
   }
-
-  .ex{
-    min-height:165px;
-  }
-
-  .ex .ico{
-    font-size:34px;
-  }
-
-  .ex small{
-    font-size:15px;
-  }
-
-  .side{
-    width:83vw;
-  }
-
-  .sidehead{
-    height:150px;
-
-    padding:20px 25px;
-
-    gap:16px;
-  }
-
-  .sidehead img{
-    width:72px;
-    height:72px;
-  }
-
-  .sidehead strong{
-    font-size:38px;
-  }
-
-  .user>button{
-    font-size:20px;
-
-    padding:22px 24px;
-  }
-
-  .userlinks{
-    padding-left:53px;
-  }
-
-  .userlinks button{
-    font-size:20px;
-
-    padding:14px 0;
-  }
-
-  .group{
-    padding:20px 25px 12px;
-
-    font-size:19px;
-  }
-
-  .sideitem{
-    padding:21px 25px;
-
-    font-size:20px;
-  }
-
 }
 
 
-/* =========================================================
-   VERY SMALL PHONES
-========================================================= */
+/* SMALL PHONES */
 
-@media(max-width:380px){
-
-  .top{
-    height:72px;
-  }
-
-  .menu,
-  .more,
-  .bell{
-    width:36px;
-    min-width:36px;
-  }
-
-  .logo{
-    width:34px;
-    height:34px;
-    flex-basis:34px;
-  }
-
-  .title{
-    font-size:21px;
-  }
-
-  .sub{
-    padding-left:15px;
-    padding-right:15px;
-
-    font-size:15px;
-  }
-
-  .news h3{
-    font-size:23px;
-  }
-
-  .news p{
-    font-size:18px;
-  }
+@media(max-width:370px){
 
   .grid,
   .cards{
-    gap:8px;
+    gap:6px;
   }
 
-  .tile{
-    min-height:145px;
-
-    padding:7px;
+  .tile,
+  .ex{
+    min-height:108px;
   }
 
-  .tile .num{
-    font-size:37px;
+  .title{
+    font-size:23px;
   }
 
-  .tile .ico{
-    font-size:31px;
-
-    margin-bottom:10px;
-  }
-
-  .tile small{
-    font-size:13px;
-  }
-
-  .timetable{
-    padding:14px 10px 24px;
-  }
-
-  .ttitle{
-    font-size:19px;
-  }
-
-  .day{
-    font-size:16px;
-  }
-
-  .day span{
+  .sub{
+    padding:0 13px;
     font-size:14px;
   }
 
-  .ex{
-    min-height:135px;
-
-    padding:6px;
-  }
-
-  .ex .ico{
-    font-size:29px;
-  }
-
-  .ex small{
-    font-size:13px;
+  .news p{
+    font-size:17px;
   }
 
 }
 
 
-/* =========================================================
-   LANDSCAPE PHONE
-========================================================= */
+/* VERY TALL / WIDE PHONES */
 
-@media(
-  max-height:500px
-) and (
-  orientation:landscape
-){
+@media(min-width:601px){
 
-  .top{
-    height:60px;
-  }
-
-  .subbar{
-    height:55px;
+  .app{
+    max-width:520px;
+    margin:auto;
   }
 
   .bottom{
-    height:58px;
-    padding-bottom:0;
+    width:min(520px,100%);
+    left:50%;
+    transform:translateX(-50%);
   }
-
-  .sidehead{
-    height:110px;
-  }
-
 }
 
 </style>
@@ -1502,9 +1135,9 @@ img{
 <div class="app">
 
 
-<!-- =====================================================
+<!-- =======================================================
      HEADER
-===================================================== -->
+======================================================= -->
 
 <header class="top">
 
@@ -1548,9 +1181,9 @@ Student
 </header>
 
 
-<!-- =====================================================
+<!-- =======================================================
      TOP NAVIGATION
-===================================================== -->
+======================================================= -->
 
 <nav class="subbar">
 
@@ -1588,9 +1221,9 @@ Extra-curricular
 <main>
 
 
-<!-- =====================================================
+<!-- =======================================================
      STUDENT HOME
-===================================================== -->
+======================================================= -->
 
 <section
   id="student"
@@ -1599,9 +1232,7 @@ Extra-curricular
 
 <div class="news">
 
-<span class="news-icon">
-▣
-</span>
+<span class="news-icon">▣</span>
 
 <h3>
 Latest news
@@ -1619,7 +1250,6 @@ Whether you’re an experienced creative or looking for ways to meet like-minded
 
 
 <div class="grid">
-
 
 <button
   class="tile pink"
@@ -1684,39 +1314,21 @@ Timetable - click to view in full
 
 </div>
 
-
 <div class="days">
 
 <div class="day">
-
 Fri 11
-
-<span>
-No events.
-</span>
-
+<span>No events.</span>
 </div>
 
-
 <div class="day">
-
 Sat 12
-
-<span>
-No events.
-</span>
-
+<span>No events.</span>
 </div>
 
-
 <div class="day">
-
 Sun 13
-
-<span>
-No events.
-</span>
-
+<span>No events.</span>
 </div>
 
 </div>
@@ -1725,7 +1337,6 @@ No events.
 
 
 <div class="grid">
-
 
 <button
   class="tile"
@@ -1779,9 +1390,9 @@ Tickets &amp; events
 </section>
 
 
-<!-- =====================================================
+<!-- =======================================================
      MY COURSE
-===================================================== -->
+======================================================= -->
 
 <section
   id="course"
@@ -1814,9 +1425,9 @@ Course information
 </section>
 
 
-<!-- =====================================================
+<!-- =======================================================
      STUDENT SUPPORT
-===================================================== -->
+======================================================= -->
 
 <section
   id="support"
@@ -1831,110 +1442,62 @@ Student Support - light
 
 <div class="cards">
 
-
-<button
-  class="ex"
-  onclick="toast('Employability')"
->
+<button class="ex" onclick="toast('Employability')">
 <span class="ico">〽</span>
 <small>Employability</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('Money')"
->
+<button class="ex" onclick="toast('Money')">
 <span class="ico">▱</span>
 <small>Money</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('Student card top up')"
->
+<button class="ex" onclick="toast('Student card top up')">
 <span class="ico">▤</span>
 <small>Student card top up</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('Wellbeing toolkit')"
->
+<button class="ex" onclick="toast('Wellbeing toolkit')">
 <span class="ico">♡</span>
 <small>Wellbeing toolkit</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('Get wellbeing help')"
->
+<button class="ex" onclick="toast('Get wellbeing help')">
 <span class="ico">♡</span>
 <small>Get wellbeing help</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('Disability inclusion')"
->
+<button class="ex" onclick="toast('Disability inclusion')">
 <span class="ico">✣</span>
 <small>Disability inclusion</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('Exam support')"
->
+<button class="ex" onclick="toast('Exam support')">
 <span class="ico">☷</span>
 <small>Exam support</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('StudentHub')"
->
+<button class="ex" onclick="toast('StudentHub')">
 <span class="ico">▱</span>
 <small>StudentHub</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('MyStudentRecord')"
->
+<button class="ex" onclick="toast('MyStudentRecord')">
 <span class="ico">▧</span>
 <small>MyStudentRecord</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('Report + Support')"
->
+<button class="ex" onclick="toast('Report + Support')">
 <span class="ico">◁</span>
 <small>Report + Support</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('Safety on campus')"
->
+<button class="ex" onclick="toast('Safety on campus')">
 <span class="ico">♢</span>
 <small>Safety on campus</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('Visa / Immigration')"
->
+<button class="ex" onclick="toast('Visa / Immigration')">
 <span class="ico">▤</span>
 <small>Visa / Immigration</small>
 </button>
@@ -1946,9 +1509,9 @@ Student Support - light
 </section>
 
 
-<!-- =====================================================
+<!-- =======================================================
      EXTRA CURRICULAR
-===================================================== -->
+======================================================= -->
 
 <section
   id="extra"
@@ -1963,128 +1526,72 @@ Extracurricular - light
 
 <div class="cards">
 
-
-<button
-  class="ex"
-  onclick="toast('Latest news')"
->
+<button class="ex" onclick="toast('Latest news')">
 <span class="ico">▤</span>
 <small>Latest news</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('NTU student life')"
->
+<button class="ex" onclick="toast('NTU student life')">
 <span class="ico">◔</span>
 <small>NTU student life</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('Job opportunities')"
->
+<button class="ex" onclick="toast('Job opportunities')">
 <span class="ico">♧</span>
 <small>Job opportunities</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('NTU Sport')"
->
+<button class="ex" onclick="toast('NTU Sport')">
 <span class="ico">NTU</span>
 <small>NTU Sport</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('LIVE LEARN WORK')"
->
+<button class="ex" onclick="toast('LIVE LEARN WORK')">
 <span class="ico">◈</span>
 <small>LIVE<br>LEARN<br>WORK</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('Student benefits')"
->
+<button class="ex" onclick="toast('Student benefits')">
 <span class="ico">☆</span>
 <small>Student benefits</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('Student Union')"
->
+<button class="ex" onclick="toast('Student Union')">
 <span class="ico">NISU</span>
 <small>Student Union</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('Study abroad')"
->
+<button class="ex" onclick="toast('Study abroad')">
 <span class="ico">▣</span>
 <small>Study abroad</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('Travel')"
->
+<button class="ex" onclick="toast('Travel')">
 <span class="ico">✈</span>
 <small>Travel</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('Global lounges')"
->
+<button class="ex" onclick="toast('Global lounges')">
 <span class="ico">◎</span>
 <small>Global lounges</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('NTU Moves')"
->
+<button class="ex" onclick="toast('NTU Moves')">
 <span class="ico">♙</span>
 <small>NTU Moves</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('NTU Arts')"
->
+<button class="ex" onclick="toast('NTU Arts')">
 <span class="ico">NTU</span>
 <small>NTU Arts</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('Volunteering')"
->
+<button class="ex" onclick="toast('Volunteering')">
 <span class="ico">⌂</span>
 <small>Volunteering</small>
 </button>
 
-
-<button
-  class="ex"
-  onclick="toast('NTU Food')"
->
+<button class="ex" onclick="toast('NTU Food')">
 <span class="ico">♜</span>
 <small>NTU Food</small>
 </button>
@@ -2096,9 +1603,9 @@ Extracurricular - light
 </section>
 
 
-<!-- =====================================================
+<!-- =======================================================
      CALENDAR
-===================================================== -->
+======================================================= -->
 
 <section
   id="calendar"
@@ -2208,9 +1715,9 @@ Today&nbsp; ›
 </section>
 
 
-<!-- =====================================================
+<!-- =======================================================
      PROFILE
-===================================================== -->
+======================================================= -->
 
 <section
   id="profile"
@@ -2222,13 +1729,11 @@ Today&nbsp; ›
 
 <div class="profile-card">
 
-
 <div class="profile-user">
 
 <div class="profile-avatar">
 ◉
 </div>
-
 
 <div>
 
@@ -2238,7 +1743,6 @@ Today&nbsp; ›
 >
 Emmanuel Morton
 </div>
-
 
 <div
   class="profile-user-id"
@@ -2323,6 +1827,7 @@ Academic year
 Save profile
 </button>
 
+
 </div>
 
 
@@ -2365,9 +1870,9 @@ UserRead
 </main>
 
 
-<!-- =====================================================
+<!-- =======================================================
      BOTTOM NAVIGATION
-===================================================== -->
+======================================================= -->
 
 <nav class="bottom">
 
@@ -2431,9 +1936,9 @@ StudentHub
 </div>
 
 
-<!-- =====================================================
+<!-- =======================================================
      SIDE DRAWER
-===================================================== -->
+======================================================= -->
 
 <div
   class="drawer"
@@ -2463,25 +1968,17 @@ MyNTU
 >
 
 <button
-  onclick="
-    document
-      .getElementById('user')
-      .classList
-      .toggle('open')
-  "
+  id="userToggle"
 >
 
-<span>
-◉
-</span>
-
+<span>◉</span>
 &nbsp;
 
 <span id="menuStudentName">
 Emmanuel Morton 2025 (N1388236)
 </span>
 
-<span>
+<span style="float:right">
 ⌄
 </span>
 
@@ -2490,46 +1987,37 @@ Emmanuel Morton 2025 (N1388236)
 
 <div class="userlinks">
 
-
 <button data-screen="profile">
 Profile
 </button>
-
 
 <button onclick="toast('Preferences')">
 Preferences
 </button>
 
-
 <button onclick="toast('Reload app')">
 Reload app
 </button>
-
 
 <button onclick="toast('Services')">
 Services
 </button>
 
-
 <button onclick="toast('Active sessions')">
 Active sessions
 </button>
-
 
 <button onclick="toast('Privacy policy')">
 Privacy policy
 </button>
 
-
 <button onclick="toast('About')">
 About
 </button>
 
-
 <button onclick="toast('Signed out')">
 Sign out
 </button>
-
 
 </div>
 
@@ -2539,7 +2027,6 @@ Sign out
 <div class="group">
 DASHBOARDS
 </div>
-
 
 <button
   class="sideitem active"
@@ -2553,7 +2040,6 @@ DASHBOARDS
 APPS
 </div>
 
-
 <button
   class="sideitem"
   data-screen="student"
@@ -2561,14 +2047,12 @@ APPS
 ▣ &nbsp; Latest news
 </button>
 
-
 <button
   class="sideitem"
   data-screen="student"
 >
 ♧ &nbsp; StudentLight-AppTileAssessmentResults
 </button>
-
 
 <button
   class="sideitem"
@@ -2590,15 +2074,10 @@ APPS
 
 </button>
 
-
 </aside>
 
 </div>
 
-
-<!-- =====================================================
-     TOAST
-===================================================== -->
 
 <div id="toast"></div>
 
@@ -2606,7 +2085,7 @@ APPS
 <script>
 
 /* =========================================================
-   PAGE NAVIGATION
+   NAVIGATION
 ========================================================= */
 
 const pages =
@@ -2617,6 +2096,16 @@ const controls =
 
 const drawer =
   document.getElementById('drawer');
+
+const user =
+  document.getElementById('user');
+
+const menu =
+  document.getElementById('menu');
+
+const userToggle =
+  document.getElementById('userToggle');
+
 
 const titles = {
 
@@ -2664,36 +2153,36 @@ function loadProfile(){
 
   if(savedGiven){
 
-    document
-      .getElementById('givenName')
-      .value = savedGiven;
+    document.getElementById(
+      'givenName'
+    ).value = savedGiven;
 
   }
 
 
   if(savedFamily){
 
-    document
-      .getElementById('familyName')
-      .value = savedFamily;
+    document.getElementById(
+      'familyName'
+    ).value = savedFamily;
 
   }
 
 
   if(savedId){
 
-    document
-      .getElementById('studentId')
-      .value = savedId;
+    document.getElementById(
+      'studentId'
+    ).value = savedId;
 
   }
 
 
   if(savedYear){
 
-    document
-      .getElementById('academicYear')
-      .value = savedYear;
+    document.getElementById(
+      'academicYear'
+    ).value = savedYear;
 
   }
 
@@ -2704,36 +2193,36 @@ function loadProfile(){
 
 
 /* =========================================================
-   UPDATE NAME + ID
+   UPDATE NAME + ID EVERYWHERE
 ========================================================= */
 
 function updateStudentDetails(){
 
   const given =
-    document
-      .getElementById('givenName')
-      ?.value ||
+    document.getElementById(
+      'givenName'
+    )?.value ||
     'Emmanuel';
 
 
   const family =
-    document
-      .getElementById('familyName')
-      ?.value ||
+    document.getElementById(
+      'familyName'
+    )?.value ||
     'Morton';
 
 
   const id =
-    document
-      .getElementById('studentId')
-      ?.value ||
+    document.getElementById(
+      'studentId'
+    )?.value ||
     'N1388236';
 
 
   const year =
-    document
-      .getElementById('academicYear')
-      ?.value ||
+    document.getElementById(
+      'academicYear'
+    )?.value ||
     '2025';
 
 
@@ -2797,31 +2286,27 @@ function updateStudentDetails(){
 function saveProfile(){
 
   const given =
-    document
-      .getElementById('givenName')
-      .value
-      .trim();
+    document.getElementById(
+      'givenName'
+    ).value.trim();
 
 
   const family =
-    document
-      .getElementById('familyName')
-      .value
-      .trim();
+    document.getElementById(
+      'familyName'
+    ).value.trim();
 
 
   const id =
-    document
-      .getElementById('studentId')
-      .value
-      .trim();
+    document.getElementById(
+      'studentId'
+    ).value.trim();
 
 
   const year =
-    document
-      .getElementById('academicYear')
-      .value
-      .trim();
+    document.getElementById(
+      'academicYear'
+    ).value.trim();
 
 
   if(
@@ -2866,7 +2351,6 @@ function saveProfile(){
 
   updateStudentDetails();
 
-
   toast('Profile saved');
 
 }
@@ -2878,33 +2362,43 @@ function saveProfile(){
 
 function show(name){
 
-  pages.forEach(page => {
+  pages.forEach(
+    page => {
 
-    page.classList.toggle(
-      'active',
-      page.id === name
-    );
+      page.classList.toggle(
+        'active',
+        page.id === name
+      );
 
+    }
+  );
+
+
+  controls.forEach(
+    control => {
+
+      control.classList.toggle(
+        'active',
+        control.dataset.screen === name
+      );
+
+    }
+  );
+
+
+  document.getElementById(
+    'pageTitle'
+  ).textContent =
+    titles[name] || 'Student';
+
+
+  closeDrawer();
+
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
   });
-
-
-  controls.forEach(control => {
-
-    control.classList.toggle(
-      'active',
-      control.dataset.screen === name
-    );
-
-  });
-
-
-  document
-    .getElementById('pageTitle')
-    .textContent =
-      titles[name] || 'Student';
-
-
-  drawer.classList.remove('open');
 
 
   if(name === 'profile'){
@@ -2913,63 +2407,257 @@ function show(name){
 
   }
 
-
-  window.scrollTo(
-    0,
-    0
-  );
-
 }
 
 
 /* =========================================================
-   NAVIGATION CONTROLS
+   NAV BUTTONS
 ========================================================= */
 
-controls.forEach(control => {
+controls.forEach(
+  control => {
 
-  control.addEventListener(
-    'click',
-    () => {
+    control.addEventListener(
+      'click',
+      () => {
 
-      show(
-        control.dataset.screen
-      );
+        show(
+          control.dataset.screen
+        );
 
-    }
-  );
+      }
+    );
 
-});
+  }
+);
 
 
 /* =========================================================
    OPEN DRAWER
 ========================================================= */
 
-document
-  .getElementById('menu')
-  .onclick = () => {
+function openDrawer(){
 
-    drawer.classList.add('open');
+  drawer.classList.add('open');
 
-  };
+}
 
 
 /* =========================================================
    CLOSE DRAWER
 ========================================================= */
 
-drawer.onclick = event => {
+function closeDrawer(){
 
-  if(event.target === drawer){
+  drawer.classList.remove('open');
 
-    drawer.classList.remove(
-      'open'
-    );
+}
+
+
+/* MENU BUTTON */
+
+menu.addEventListener(
+  'click',
+  openDrawer
+);
+
+
+/* CLOSE BY TAPPING OUTSIDE */
+
+drawer.addEventListener(
+  'click',
+  event => {
+
+    if(
+      event.target === drawer
+    ){
+
+      closeDrawer();
+
+    }
 
   }
+);
 
-};
+
+/* =========================================================
+   USER DROPDOWN
+========================================================= */
+
+userToggle.addEventListener(
+  'click',
+  event => {
+
+    event.stopPropagation();
+
+    user.classList.toggle('open');
+
+  }
+);
+
+
+/* =========================================================
+   SWIPE GESTURE
+=========================================================
+
+   This gives you a backup if the three-line button
+   is difficult to tap.
+
+   A horizontal swipe anywhere on the HOME SCREEN
+   will open the drawer.
+
+   A horizontal swipe in the opposite direction while
+   the drawer is open will close it.
+
+========================================================= */
+
+let touchStartX = 0;
+let touchStartY = 0;
+
+let touchStartTime = 0;
+
+
+/* START TOUCH */
+
+document.addEventListener(
+  'touchstart',
+  event => {
+
+    if(
+      !event.touches ||
+      !event.touches.length
+    ){
+
+      return;
+
+    }
+
+
+    touchStartX =
+      event.touches[0].clientX;
+
+    touchStartY =
+      event.touches[0].clientY;
+
+    touchStartTime =
+      Date.now();
+
+  },
+  {
+    passive:true
+  }
+);
+
+
+/* END TOUCH */
+
+document.addEventListener(
+  'touchend',
+  event => {
+
+    if(
+      !event.changedTouches ||
+      !event.changedTouches.length
+    ){
+
+      return;
+
+    }
+
+
+    const endX =
+      event.changedTouches[0].clientX;
+
+    const endY =
+      event.changedTouches[0].clientY;
+
+
+    const deltaX =
+      endX - touchStartX;
+
+    const deltaY =
+      endY - touchStartY;
+
+
+    const elapsed =
+      Date.now() - touchStartTime;
+
+
+    const horizontal =
+      Math.abs(deltaX) >
+      Math.abs(deltaY);
+
+
+    const distance =
+      Math.abs(deltaX);
+
+
+    /*
+      Only recognise a deliberate,
+      reasonably quick horizontal swipe.
+    */
+
+    if(
+      !horizontal ||
+      distance < 65 ||
+      elapsed > 700
+    ){
+
+      return;
+
+    }
+
+
+    /*
+      If the drawer is already open,
+      swipe either direction to close it.
+    */
+
+    if(
+      drawer.classList.contains('open')
+    ){
+
+      if(distance >= 65){
+
+        closeDrawer();
+
+      }
+
+      return;
+
+    }
+
+
+    /*
+      Drawer is closed.
+
+      Open it from a horizontal swipe
+      while the user is on the Student/Home
+      screen.
+
+      This intentionally supports BOTH directions
+      so you have a backup if one direction feels
+      more natural on the phone.
+    */
+
+    const studentScreen =
+      document.getElementById('student');
+
+
+    if(
+      studentScreen &&
+      studentScreen.classList.contains('active')
+    ){
+
+      openDrawer();
+
+    }
+
+  },
+  {
+    passive:true
+  }
+);
 
 
 /* =========================================================
